@@ -1,0 +1,34 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Cat Book</title>
+  <style>
+    .hidden {
+      display: none;
+    }
+  </style>
+</head>
+<body>
+  <h3>Welcome to Cat Book</h3>
+  <button id="create-cat">Create New Cat</button>
+  <form class="hidden">
+    <input type="text" placeholder="Name" name="name">
+    <input type="text" placeholder="Age" name="age">
+    <input type="text" placeholder="Tagline" name="tag_line">
+    <input type="text" placeholder="Img URL" name="img_url">
+    <input type="submit">
+  </form>
+  <table id="cats-table">
+    <tr colspan="7">
+      <th>Name</th>
+      <th>Age</th>
+      <th>Tag Line</th>
+      <th>Score</th>
+    </tr>
+  </table>
+
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+  <script src="/cat_book/js/main.js"></script>
+</body>
+</html>

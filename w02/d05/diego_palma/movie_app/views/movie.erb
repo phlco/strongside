@@ -1,0 +1,18 @@
+  <div class="movie_wrapper">
+     <div class="title">
+     <h1><%= @movie['Title'] %> (<%= @movie['Year'] %>)</h1>
+      <p><%= @movie['Rated'] %> / Release date: <%= @movie['Released'] %> / Runtime: <%= @movie['Runtime'] %></p>
+    </div>
+    <div class="poster">
+      <img src="<%= @movie['Poster'] %>">
+    </div>
+    <div class="movie_info">
+      <p><strong>Genre: </strong><%= @movie['Genre'] %></p>
+      <p><strong>Director: </strong><%= @movie['Director'] %></p>
+      <p><strong>Writer: </strong><%= @movie['Writer'] %></p>
+      <p><strong>Actors: </strong><%= @movie['Actors'] %></p>
+      <p><strong>Plot: </strong><%= @movie['Plot'] %></p>
+      <p><strong>IMDB rating: </strong><%= @movie['imdbRating'] %></p>
+    </div>
+  </div>
+</div>

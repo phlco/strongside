@@ -1,0 +1,28 @@
+%h1 Git Fit
+#exercises
+#detail
+#new
+
+
+= render partial: 'exercises'
+= render partial: 'detail'
+= render partial: 'new'
+
+
+/ <script id="exercises-template" type="text/x-handlebars-template">
+/   <ul>
+/   {{#each exercises}}
+/     <li class="exercise" data-id="{{id}}">
+/       <div><strong>{{name}}</strong></div>
+/     </li>
+/   {{/each}}
+/   </ul>
+/ </script>
+
+/ <script id="detail-template" type="text/x-handlebars-template">
+/ <div class="detail">
+/   Name: {{name}}<br>
+/   Calories: {{calories}}
+/   Difficulty: {{difficulty}}
+/ </div>
+/ </script>

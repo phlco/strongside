@@ -1,0 +1,8 @@
+<h1>Name: <%= @kitty.name %></h1>
+<h1>Tagline: <%= @kitty.tagline %></h1>
+<img src="<%= @kitty.img_url %>"></br>
+
+<%= link_to "Edit", edit_kitty_path %>
+<%= button_to "Delete", {:controller => :kitties,
+      :action => 'destroy', :id => @kitty.id }, :method => :delete %>
+

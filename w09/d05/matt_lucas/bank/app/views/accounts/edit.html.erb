@@ -1,0 +1,15 @@
+<br><br>
+Your Accounts:
+<br><br>
+<%# binding.pry %>
+
+
+  Name of Account : <%= @account.name %> <br>
+  Account balance: $<%= @account.balance %> <br>
+
+  <%= form_for @account, url: {action: "update"} do |f| %>
+    <%= f.label :amount %>
+    <%= f.text_field :amount %>
+    <%= f.submit "Input Transaction" %>
+  <% end %>
+

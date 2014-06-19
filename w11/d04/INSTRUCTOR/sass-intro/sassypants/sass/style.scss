@@ -1,0 +1,38 @@
+@import 'normalize';
+@import 'mixins';
+
+// variables
+$button-login-bg: #ea4c88;
+
+
+// global styles
+* {
+  @include box-sizing(border-box);
+}
+
+// components
+.button {
+  color: #eee;
+  // you can nest certain properties.
+  // font-size and font-weight become font: {size : x; weight: y;}
+  // http://sass-lang.com/documentation/file.SASS_REFERENCE.html#nested_properties
+  font: {
+    size: 14px;
+    weight: bold;
+  }
+  text-transform: uppercase;
+  height: 50px;
+  width: 280px;
+  border: none;
+  background: $button-login-bg;
+  cursor: pointer;
+  @include border-radius();
+
+  &:hover{
+    background: darken($button-login-bg, 4%);
+  }
+}
+
+
+
+

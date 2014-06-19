@@ -1,0 +1,33 @@
+# must make amazon web services
+
+# more configuration for config for environments
+  config.paperclip_defaults = {
+  :storage => :s3,
+  :s3_credentials => {
+    :bucket => ENV['S3_BUCKET_NAME'],
+    :access_key_id => ENV['AWS_ACCESS_KEY_ID'],
+    :secret_access_key => ENV['AWS_SECRET_ACCESS_KEY']
+  }
+
+# dont forget to precomplie for heroku for environments
+config.assets.initialize_on_precompile = false
+
+# initializers file
+Paperclip::Attachment.default_options[:url] = ':s3_domain_url'
+Paperclip::Attachment.default_options[:path] = '/:class/:attachment/:id_partition/:style/:filename'
+
+#form fields for images
+#multipart true is to upload files because you can upload up to 4megabits whereas other methods get and post sends alot less
+<%= form_for(@user, html:{multipart: true}) do |f| %>
+  <div class="field">
+    <%= f.label :name %><br />
+    <%= f.text_field :name %>
+  </div>
+ <div class="field">
+    <%= f.label :image %><br />
+    <%= f.file_field :image %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

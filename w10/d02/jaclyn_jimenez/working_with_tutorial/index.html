@@ -1,0 +1,148 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>BackBone Tutorial</title>
+  <link rel= "stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.0.2/css/bootstrap.min.css">
+</head>
+<body>
+  <div class= "container">
+    <h1>User Manager</h1>
+    <hr />
+    <div class="page"></div>
+  </div>
+  <script type= 'text/template' id = 'user-list-template'>
+  <a href="#/new" class="btn btn-primary">New User</a>
+  <hr />
+    <table class="table striped">
+      <thead>
+        <tr>
+          <th>First Name</th><th>Last Name</th><th>Age</th><th></th>
+        </tr>
+      </thead>
+      <tbody>
+        <% _.each(users, function(user) { %>
+          <tr>
+            <td><%= user.get('firstname') %></td>
+            <td><%= user.get('lastname') %></td>
+            <td><%= user.get('age') %></td>
+            <td></td>
+          </tr>
+        <% }); %>
+      </tbody>
+    </table>
+  </script>
+
+  <script type= 'text/template' id = 'edit-user-template'>
+  <form class="edit-user-form">
+  <legend>Create USER</legend>
+  <label>First Name</label>
+  <input type="text" name = "firstname" />
+  <label>Last Name</label>
+  <input type="text" name = "lastname" />
+  <label>Age</label>
+  <input type="text" name = "age" />
+  </hr>
+  <button type="submit" class= "btn">Create</button>
+  </script>
+
+  <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+  <script src="http://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.5.2/underscore-min.js"></script>
+  <script src="http://cdnjs.cloudflare.com/ajax/libs/backbone.js/1.1.0/backbone-min.js"></script>
+  <script>
+  $.fn.serializeObject = function() {
+      var o = {};
+      var a = this.serializeArray();
+      $.each(a, function() {
+          if (o[this.name] !== undefined) {
+              if (!o[this.name].push) {
+                  o[this.name] = [o[this.name]];
+              }
+              o[this.name].push(this.value || '');
+          } else {
+              o[this.name] = this.value || '';
+          }
+      });
+      return o;
+    };
+
+
+  $.ajaxPrefilter( function( options, originalOptions, jqXHR ) {
+    options.url = 'http://backbonejs-beginner.herokuapp.com' + options.url;
+  });
+
+  //MODELS
+  var Users = Backbone.Collection.extend({
+    url: '/users'
+  });
+
+  var User = Backbone.Model.extend({
+    urlRoot: '/users'
+
+  })
+
+  //VIEWS
+  var UserList = Backbone.View.extend({
+    el: '.page',
+    render: function(){
+      var that = this;
+      var users = new Users();
+      users.fetch({
+        success: function(users){
+          var template = _.template($('#user-list-template').html(), {users: users.models})
+          //string of content, data to pass in to string
+          that.$el.html(template)
+        }
+      })
+    }
+  });
+
+  var EditUser = Backbone.View.extend({
+    el: '.page',
+    render: function(){
+      var template = _.template($('#edit-user-template').html(), {})
+      this.$el.html(template)
+    },
+    events: {
+      'submit .edit-user-form': 'saveUser'
+    },
+    saveUser: function(ev){
+      var userDetails = $(ev.currentTarget).serializeObject();
+      var user = new User();
+      user.save(userDetails, {
+        success: function(user){
+          router.navigate('', {trigger: true})
+        }
+      })
+      console.log(userDetails);
+      return false;
+    }
+  })
+
+  //CONTROLLER
+  var Router = Backbone.Router.extend({
+    routes: {
+      '': 'home',
+      'new': 'editUser'
+    }
+  });
+
+  var userList = new UserList()
+  var editUser = new EditUser()
+
+  //ROUTE
+  var router = new Router();
+  router.on('route:home', function(){
+    userList.render();
+  });
+  router.on('route:editUser', function(){
+    editUser.render();
+  });
+
+  Backbone.history.start();
+
+  </script>
+
+
+</body>
+</html>

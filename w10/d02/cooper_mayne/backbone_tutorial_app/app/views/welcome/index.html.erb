@@ -1,0 +1,58 @@
+<h1>User Manager</h1>
+<hr />
+
+<div id="container">
+  <div class="page"> </div>
+</div>
+
+<script id="user-list-template" type="text/x-handlebars-template">
+  <a class='btn btn-primary' href='#/new'>create new user</a>
+  <hr \>
+  <table class="table striped">
+    <thead>
+    <tr>
+    <th>Name</th><th>Age</th><th></th>
+    </tr>
+    </thead>
+
+    <tbody>
+      {{#each users}}
+        <tr>
+          <td>{{name}}</td>
+          <td>{{age}}</td>
+          <td><a class="btn" href='#/edit/{{id}}'>Edit</a></td>
+        </tr>
+      {{/each}}
+    </tbody>
+  </table>
+</script>
+
+<script id="user-create-template" type="text/x-handlebars-template">
+  <legend>Create New User</legend>
+
+  <form class="edit-user-form">
+
+    <label for="Name">Name</label><input type="text" name="name" value="" id="Name">
+
+    <label for="Age">Age</label><input type="text" name="age" value="" id="Age">
+  <hr \>
+
+    <input class='btn' type="submit" name="submit_button" value="Create User">
+  </form>
+</script>
+
+<script id="user-edit-template" type="text/x-handlebars-template">
+  <legend>Edit User</legend>
+
+  <form class="edit-user-form">
+
+    <label for="Name">Name</label><input type="text" name="name" value={{name}} id="Name">
+
+    <label for="Age">Age</label><input type="text" name="age" value={{age}} id="Age">
+  <hr \>
+
+  <input type="hidden" name="id" value={{id}} />
+
+    <input class='btn' type="submit" name="submit_button" value="Update">
+  </form>
+</script>

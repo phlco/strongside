@@ -1,0 +1,29 @@
+Edit specific cat, with form below
+
+<%= form_for(@cat) do |f| %>
+
+  <div class="field">
+    <%= f.label :name %><br />
+    <%= f.text_field :name %>
+  </div>
+
+  <div class="field">
+    <%= f.label :age %><br />
+    <%= f.text_field :age %>
+  </div>
+
+  <div class="field">
+    <%= f.label :tag_line %><br />
+    <%= f.text_field :tag_line %>
+  </div>
+
+  <div class="field">
+    <%= f.label :img_url %><br />
+    <%= f.text_field :img_url %>
+  </div>
+
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+
+<% end %>

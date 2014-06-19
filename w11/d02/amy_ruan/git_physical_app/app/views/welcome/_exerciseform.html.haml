@@ -1,0 +1,11 @@
+
+%script#exercises-form-template{type:"text/x-handlebars-template"}
+  = form_for :exercise, :url => {:controller => 'api/exercises', :action => 'create'} do |f|
+    = f.label "name", "Name", :class => 'header_label'
+    = f.text_field "name", :placeholder => 'Name'
+    = f.label "calories", "Calories", :class => 'header_label'
+    = f.number_field "calories", :placeholder => 'Calories'
+    = f.label "difficulty", "Difficulty", :class => 'header_label'
+    = f.number_field "difficulty", :placeholder => 'Difficulty'
+    = f.submit 'Create New Exercise', :id => 'submit_exercise'
+

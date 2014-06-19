@@ -1,0 +1,48 @@
+<div class="container">
+  <h1>User Manager</h1>
+  <hr />
+  <div class="page"></div>
+</div>
+
+<script type="text/template" id="user-list-template">
+   <a href="#/new" class="btn btn-primary">New</a>
+   <hr />
+   <table class="table striped">
+     <thead>
+       <tr>
+         <th>First Name</th><th>Last Name</th><th>Age</th><th></th>
+       </tr>
+     </thead>
+     <tbody>
+       {{#each users}}
+         <tr>
+           <td>{{ firstname }}</td>
+           <td>{{ lastname }}</td>
+           <td>{{ age }}</td>
+           <td><a class="btn" href="#/edit/{{ id }}">Edit</a></td>
+         </tr>
+       {{/each}}
+     </tbody>
+   </table>
+ </script>
+
+ <script type="text/template" id="edit-user-template">
+    <form class="edit-user-form">
+       <legend>{{formType}} User</legend>
+
+        <label>First Name</label>
+        <input name="firstname" type="text" value="{{user.firstname}}">
+        <label>Last Name</label>
+        <input name="lastname" type="text" value="{{user.lastname}}">
+        <label>Age</label>
+        <input name="age" type="text" value="{{user.age}}">
+        <hr />
+
+        <button type="submit" class="btn">{{ submitType }}</button>
+        {{#if user.id }}
+          <input type="hidden" name="id" value="{{ user.id }}" />
+          <button data-user-id="{{ user.id }}" class="btn btn-danger delete">Delete</button>
+        {{/if }}
+     </form>
+
+ </script>

@@ -1,0 +1,51 @@
+.white {
+  background-color: white;
+}
+
+.red {
+  background-color: hsla(0, 80%, 70%, 1);
+}
+
+.orange {
+  background-color: hsla(21, 80%, 70%, 1);
+}
+
+.yellow {
+  background-color: hsla(45, 80%, 70%, 1);
+}
+
+.green {
+  background-color: hsla(103, 80%, 70%, 1);
+}
+
+.blue {
+  background-color: hsla(212, 80%, 70%, 1);
+}
+
+.purple {
+  background-color: hsla(269, 80%, 70%, 1);
+}
+
+.pink {
+  background-color: hsla(312, 80%, 70%, 1);
+}
+
+.button {
+  margin-right: auto;
+  margin-left: auto;
+  margin-top: 20%;
+
+  text-align: center;
+  line-height: 150px;
+
+  width: 150px;
+  height: 150px;
+  -webkit-border-radius: 75px;
+  -moz-border-radius: 75px;
+  border-radius: 75px;
+
+  font-family: 'Century Gothic';
+  font-size: 40px;
+  background-color: #ffdae9;
+  color: white;
+}

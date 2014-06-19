@@ -1,0 +1,10 @@
+.student-box {
+  width: 500px;
+  height: 800px;
+  float: left;
+}
+
+.picture {
+  width:50%;
+  height: auto;
+}

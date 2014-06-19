@@ -1,0 +1,3 @@
+Cat.create(name: "henrietta", age: 3, tag_line: "im sexy and i know it", image_url: "http://www.crazywheelies.com/media/sexy%20cat.jpg")
+Cat.create(name: "broomhilda", age: 4, tag_line: "they call me buff daddy", image_url: "http://crazycatboy.files.wordpress.com/2013/06/1cat5.jpg")
+Cat.create(name: "Pimp C", age: 5, tag_line: "don't act like youre not impressed", image_url: "http://media.treehugger.com/assets/images/2011/10/sexy-cat.jpg")

@@ -1,0 +1,37 @@
+// require_relative '..app/assets/javascripts/postcard'
+
+describe("Mailitem Object", function(){
+
+  it("is empty", function(){
+    var mailItem = new mailItem();
+    expect(mailItem.isEmpty()).toBe(true);
+  });
+
+});
+
+
+
+
+  // it("has a stamp value", function(){
+  // var mailItem = new MailItem();
+  // expect(mailItem.stampValue.toBe(true);
+  // }
+
+
+
+
+function MailItem() {
+  this.item = [];
+}
+
+MailItem.prototype.isEmpty = function() {
+  return this.item.length === 0;
+}
+
+// Mailitem.prototype.isTrue = function() {
+//   return this.item  === !==-1;
+// }
+
+// Mailitem.prototype.isTrue = function() {
+//   return this.item  === !==-1;
+// }

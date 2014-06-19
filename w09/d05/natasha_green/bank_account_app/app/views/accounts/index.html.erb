@@ -1,0 +1,9 @@
+accounts page
+<%=link_to "Back", users_path  %>
+
+<h1> <%= @user.name%>, these are the accounts you have: </h1>
+
+<% @accounts.each do |account| %>
+ <%= link_to account.name, user_account_path(account.user_id, account)  %>
+
+<% end %>

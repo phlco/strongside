@@ -1,0 +1,16 @@
+/*
+  Place all the styles related to the matching controller here.
+  They will automatically be included in application.css.
+*/
+.cats-table {
+  border-collapse: collapse;
+}
+.cats-table tr {
+  padding: 5px;
+}
+.cats-table td {
+  padding: 5px 10px;
+}
+.cats-table tr:nth-of-type(even){
+  background: pink;
+}

@@ -1,0 +1,5 @@
+Exercise.create(name: "Squats", calories: 50, difficulty: 3)
+Exercise.create(name: "Chin ups", calories: 50, difficulty: 3)
+Exercise.create(name: "Push ups", calories: 30, difficulty: 7)
+Exercise.create(name: "Sit ups", calories: 5, difficulty: 2)
+Exercise.create(name: "Bench Press", calories: 9, difficulty: 1)

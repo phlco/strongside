@@ -1,0 +1,28 @@
+<h1>Listing cats</h1>
+<% @cats.each do |cat| %>
+<div id="cats">
+  <div class="cat-info">
+    <h4>Name</h4>
+    <p><%= cat.name %></p>
+    <h4>Age</h4>
+    <p><%= cat.age %></p>
+  </div>
+  <div class="cat-pic">
+    <img src="<%= cat.image_url %>" alt="Profile Pic">
+  </div>
+  <div class="tagline">
+    <h4>Tagline</h4>
+    <p><%= cat.tag_line %></p>
+  </div>
+  <div class="cat-links">
+    <%= link_to 'Show', cat %>
+    <%= link_to 'Edit', edit_cat_path(cat) %>
+    <%= link_to 'Destroy', cat, method: :delete, data: { confirm: 'Are you sure?' } %>
+  </div>
+</div>
+<% end %>
+
+
+<br />
+
+<%= link_to 'New Cat', new_cat_path %>

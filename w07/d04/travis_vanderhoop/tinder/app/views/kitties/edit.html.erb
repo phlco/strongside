@@ -1,0 +1,9 @@
+<%= form_for @kitty do |f| %>
+  <%= f.label :name, 'Name' %>:
+  <%= f.text_field :name %><br />
+  <%= f.label :tagline, 'Tagline' %>:
+  <%= f.text_field :tagline %><br />
+  <%= f.label :img_url, 'Image URL' %>:
+  <%= f.text_field :img_url %><br />
+  <%= f.submit %>
+<% end %>

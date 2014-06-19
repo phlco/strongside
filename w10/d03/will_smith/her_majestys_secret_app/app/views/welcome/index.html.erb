@@ -1,0 +1,63 @@
+<div class="container">
+  <div id="films">
+    <h1>Bond Films</h1>
+    <button class="btn btn-sm btn-info" id="bestBond">
+      <span class="glyphicon glyphicon-star"></span> best bond</button>
+    <button class="btn btn-sm btn-danger" id="worstBond">
+      <span class="glyphicon glyphicon-warning-sign"></span> worst bond</button>
+    <button class="btn btn-sm btn-default" id="loneliestBond">
+      <span class="glyphicon glyphicon-star-empty"></span> loneliest bond</button>
+    <button class="btn btn-sm btn-warning" id="oddBonds">
+      <span class="glyphicon glyphicon-eye-close"></span> odd bonds</button>
+    <button class="btn btn-sm btn-primary" id="starCount">
+      <span class="glyphicon glyphicon-certificate"></span> star count</button>
+    <button class="btn btn-sm btn-success" id="totalGross">
+      <span class="glyphicon glyphicon-usd"></span> total Gross</button>
+    <button class="btn btn-sm btn-info" id="getActors">
+      <span class="glyphicon glyphicon-th-list"></span> get actors</button>
+    <button class="btn btn-sm btn-primary" id="viewAll">
+      <span class="glyphicon glyphicon-sort-by-alphabet"></span> view all</button>
+    <div id="display"></div>
+  </div>
+</div>
+
+<script id="films-table-template" type="text/x-handlebars-template">
+<table class="table table-hover table-striped">
+  <thead>
+    <tr>
+      <td>title</td>
+      <td>year</td>
+      <td>actor</td>
+      <td>gross</td>
+    </tr>
+  </thead>
+  <tbody>
+  {{#each films}}
+  <tr>
+    <td>{{title}}</td>
+    <td>{{year}}</td>
+    <td>{{actor}}</td>
+    <td>{{gross}}</td>
+  </tr>
+  {{/each}}
+  </tbody>
+</table>
+</script>
+
+<script id="actor-template" type="text/x-handlebars-template">
+  <p>{{actor}} : {{gross}}</p>
+</script>
+
+<script id="title-template" type="text/x-handlebars-template">
+  <ul>
+    {{#each titles}}
+    <li>{{this}}</li>
+    {{/each}}
+  </ul>
+</script>
+
+<script id="obj-template" type="text/x-handlebars-template">
+  {{#each star}}
+    <p>{{@key}}: {{this}}</p>
+  {{/each}}
+</script>

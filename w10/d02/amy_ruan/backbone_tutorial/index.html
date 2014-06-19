@@ -1,0 +1,184 @@
+<html><!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+  <link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css">
+</head>
+<body>
+  <div class="container">
+    <h1>User Manager</h1>
+    <hr />
+  <div class="page"></div>
+</div>
+
+
+<script type="text/template" id="user-list-template">
+<!-- // backbone's way of linking to other tabs -->
+<a href="#/new" class="btn btn-primary">New User</a>
+<hr />
+<table class="table striped">
+  <thead>
+    <tr>
+      <th>First Name</th>
+      <th>Last Name</th>
+      <th>Age</th>
+    </tr>
+  </thead>
+<tbody>
+  <% _.each(users, function(user) {%>
+    <tr>
+      <td><%= user.get('firstname')%></td>
+      <td><%= user.get('lastname')%></td>
+      <td><%= user.get('age')%></td>
+      <td><a href="#/edit/<%=user.id%>"class="btn">Edit</a></td>
+    </tr>
+    <% }); %>
+</tbody>
+</script>
+
+
+<script type="text/template" id="edit-user-template">
+  <form class="edit-user-form">
+    <legend><%= user ? 'Update' : 'Create'%> User</legend>
+    <label>First Name</label>
+    <input type= "text" name="firstname" value="<%= user ? user.get('firstname') : ' ' %>" />
+    <label>Last Name</label>
+    <input type= "text" name="lastname" value="<%= user ? user.get('lastname') : ' ' %>"/>
+    <label>Age</label>
+    <input type= "text" name="age" value="<%= user ? user.get('age') : ' ' %>"/>
+    <hr />
+    <% if(user) {%>
+      <input type="hidden" name="id" value= "<%= user.id%>" />
+      <button type="button" class="btn btn-danger delete">Delete</button>
+    <% }; %>
+    <button type="submit" class="btn"><%= user ? 'Update' : 'Create'%></button>
+  </form>
+</script>
+
+  <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js
+"></script>
+  <script src="http://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.5.2/underscore-min.js"></script>
+  <script src="http://cdnjs.cloudflare.com/ajax/libs/backbone.js/1.1.0/backbone-min.js"></script>
+
+  <script>
+
+  //links to his url
+  $.ajaxPrefilter( function( options, originalOptions, jqXHR ) {
+    options.url = 'http://backbonejs-beginner.herokuapp.com' + options.url;
+    options.crossDomain = true;
+  });
+
+  $.fn.serializeObject = function() {
+  var o = {};
+  var a = this.serializeArray();
+  $.each(a, function() {
+      if (o[this.name] !== undefined) {
+          if (!o[this.name].push) {
+              o[this.name] = [o[this.name]];
+          }
+          o[this.name].push(this.value || '');
+      } else {
+          o[this.name] = this.value || '';
+      }
+  });
+  return o;
+};
+
+    var Users = Backbone.Collection.extend({
+      url: '/users'
+    })
+
+    //BACKbone will know to prepend the id correctly
+    var User = Backbone.Model.extend({
+      urlRoot: '/users'
+    })
+
+    var UserList = Backbone.View.extend({
+      el: '.page',
+      render: function(){
+        //need this to refer back to the original this that is not available in the fetch
+        //used to pass scope
+        var that = this;
+        var users = new Users();
+        users.fetch({
+          success: function(users){
+            //underscore
+            var template = _.template($('#user-list-template').html(), {users: users.models});
+            console.log(that.$el.html(template));
+          }
+        })
+
+      }
+    });
+
+    var EditUser = Backbone.View.extend({
+      el: '.page',
+      render: function(options){
+        var that = this;
+        if(options.id){
+          that.user = new User({id: options.id});
+          that.user.fetch({
+            success: function(user){
+              var template = _.template($('#edit-user-template').html(),{user: user});
+              that.$el.html(template);
+            }
+          })
+        } else {
+          var template = _.template($('#edit-user-template').html(),{user: null});
+          this.$el.html(template);
+        }
+      },
+      events: {
+        'submit .edit-user-form': 'saveUser',
+        'click .delete': 'deleteUser'
+      },
+      saveUser: function(ev){
+        var userDetails = $(ev.currentTarget).serializeObject();
+        var user = new User();
+        user.save(userDetails, {
+          success: function(user){
+            // need to trigger for it to work
+            router.navigate('', {trigger:true});
+          }
+        })
+        // prevent browser from changing but will submit
+        return false;
+      },
+      deleteUser: function(ev){
+        //delete the user that we dictated this referes to the user above not sure  i UNDERSTAND WHY it is this here and that over there.
+        this.user.destroy({
+          success: function(){
+          router.navigate('', {trigger:true});
+          }
+        })
+        return false;
+      }
+    })
+    var Router = Backbone.Router.extend({
+      routes: {
+        '':'home',
+        'new.json': 'editUser',
+        'edit/:id.json' : 'editUser'
+      }
+    });
+
+    var userList = new UserList();
+    var editUser = new EditUser();
+    var router = new Router();
+    router.on('route:home', function(){
+      userList.render();
+      // console.log("We have loaded the home page");
+    });
+
+    router.on('route:editUser', function(id){
+      editUser.render({id: id});
+      // console.log("te");
+    });
+    // need this to start!
+    Backbone.history.start();
+
+  </script>
+
+</body>
+</html>

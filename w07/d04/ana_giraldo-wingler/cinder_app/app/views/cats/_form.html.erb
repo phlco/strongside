@@ -1,0 +1,23 @@
+<%= form_for(@cat) do |f| %>
+<div class="field">
+  <%= f.label :name %><br />
+  <%= f.text_field :name %>
+</div>
+<div class="field">
+  <%= f.label :sex, "male" %>
+  <%= f.radio_button :sex, "male" %>
+  <%= f.label :sex, "female" %>
+  <%= f.radio_button :sex, "female" %><br>
+</div>
+<div class="field">
+  <%= f.label :tag_line %><br />
+  <%= f.text_field :tag_line %>
+</div>
+<div class="field">
+  <%= f.label :pic_url %><br />
+  <%= f.text_field :pic_url %>
+</div>
+<div class="actions">
+  <%= f.submit %>
+</div>
+<% end %>

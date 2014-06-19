@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>BankingApp</title>
+  <%= stylesheet_link_tag    "application", :media => "all" %>
+  <%= javascript_include_tag "application" %>
+  <%= csrf_meta_tags %>
+</head>
+<body>
+  <div class="nav">
+    <% unless current_user %>
+      <%= link_to 'Log In', login_path %>
+      or
+      <%= link_to 'Create Account', signup_path %>
+    <% else %>
+      Hello, <%= current_user.email %>
+      <%= link_to 'Log Out', logout_path, :method => "delete" %>
+    <% end %>
+  </div>
+
+  <% flash.each do |key, message| %>
+    <p id="notice" class="notice <%= key %>">
+      <%= message %>
+    </p>
+  <% end %>
+
+  <%= yield %>
+</body>
+</html>

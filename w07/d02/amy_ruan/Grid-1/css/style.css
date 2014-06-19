@@ -1,0 +1,86 @@
+body{
+}
+
+.row{
+  width: 1600px;
+  margin-top:-10px; /*why do i need this so big?* but jt's way is faster..../*/
+}
+
+.tile{
+  margin-top: -1px;
+  margin-bottom: -1px;
+  background-color: #F4F7F7;
+  display: inline-block;
+}
+
+.green{
+  background-color: #89F7A5;
+  display: inline-block;
+}
+
+.staygreen{
+  background-color: #89F7A5;
+    display: inline-block;
+}
+
+.cNoColor{
+
+  background-color: #F4F7F7;
+}
+
+.swatches{
+  width:1600px;
+  height:50px;
+  border:2px solid #919191;
+  margin-bottom: 10px;
+}
+
+
+.color{
+  width:30px;
+  height:30px;
+  display:inline-block;
+  margin: 10px 10px 5px 10px
+ }
+
+.cfacade{
+  background-color: #facade;
+}
+
+.cD3CEAA{
+  background-color: #D3CEAA;
+}
+
+
+.cFFEABB{
+  background-color: #FFEABB;
+}
+
+.cB3F5D6{
+  background-color: #B3F5D6;
+}
+
+.cBBDAFF{
+  background-color: #BBDAFF;
+}
+
+.hcfacade{
+  background-color: #facade;
+}
+
+.hcD3CEAA{
+  background-color: #D3CEAA;
+}
+
+
+.hcFFEABB{
+  background-color: #FFEABB;
+}
+
+.hcB3F5D6{
+  background-color: #B3F5D6;
+}
+
+.hcBBDAFF{
+  background-color: #BBDAFF;
+}

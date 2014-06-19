@@ -1,0 +1,45 @@
+body {
+  font-family: 'helvetica';
+  font-size: 16pt;
+  color: #383737;
+  padding: 3%;
+}
+
+h1 {
+  font-size: 1.5em;
+  font-weight: bold;
+}
+
+h3 {
+  text-transform: uppercase;
+  font-weight: bold;
+  font-size: .7em;
+  letter-spacing: 0.09em;
+}
+
+a {
+  text-decoration: none;
+  color: #752424;
+}
+
+#student-wrapper {
+  width: 100%;
+  padding: 5%;
+  margin: 0 auto;
+}
+
+.student {
+  float: left;
+  border: 1px solid #383737;
+  margin: 2%;
+  padding: 2%;
+  height: 300px;
+  width: 250px;
+  overflow: hidden;
+}
+
+img {
+  height: 200px;
+  width: 200px;
+  overflow: hidden;
+}

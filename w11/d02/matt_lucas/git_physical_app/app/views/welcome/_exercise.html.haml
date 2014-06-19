@@ -1,0 +1,7 @@
+%script#exercises-template{type:"text/x-handlebars-template"}
+  %ul
+    {{#each exercises}}
+    %li.exercise{data: {id: "{{id}}" }}
+      %div
+        %strong {{name}}
+    {{/each}}

@@ -1,0 +1,14 @@
+* {
+  background-color: #cacaca
+}
+body {
+  font-family: monospace;
+}
+#show-all {
+  font-size: 10px;
+  text-align: left;
+}
+
+th {
+  border: 1px solid black;
+}

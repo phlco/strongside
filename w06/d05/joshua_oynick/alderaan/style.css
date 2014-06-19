@@ -1,0 +1,12 @@
+.planet {
+  height: 50px;
+  width: 50px;
+  border: 1px solid blue;
+  border-radius: 50%;
+  padding: 30px;
+  margin: 20px;
+}
+
+#never {
+
+}

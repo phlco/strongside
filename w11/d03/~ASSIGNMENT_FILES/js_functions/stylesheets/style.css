@@ -1,0 +1,12 @@
+body {
+  text-align: center;
+}
+
+.container {
+  margin: 0 auto;
+}
+
+.words{
+  width: 150px;
+  height: 200px;
+}

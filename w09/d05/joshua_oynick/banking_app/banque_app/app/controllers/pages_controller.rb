@@ -1,0 +1,22 @@
+class PagesController < ApplicationControler
+  def home
+    @title = "Home"
+  end
+
+  def about
+    @title = "About"
+  end
+
+  def login
+    @title = "Login"
+  end
+
+  def help
+    @title = "Help"
+  end
+
+  def new
+    @title = "Sign Up"
+  end
+
+end

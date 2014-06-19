@@ -1,0 +1,46 @@
+<h1>MAKE A NEW PROGRAMMER!</h1>
+<%= form_tag '/programmers' do %>
+  <%= label_tag 'name' %>
+  <%= text_field_tag('name', nil, :required => true) %>
+  <%= label_tag 'twitter_username'%>
+  <%= text_field_tag('twitter_username',nil,:required => true) %>
+  <%= label_tag 'twitter_pic' %>
+  <%= text_field_tag('twitter_pic',nil, :required => true) %>
+  <%= label_tag 'github_username' %>
+  <%= text_field_tag('github_username', nil, :required => true) %>
+  <%= submit_tag 'Create' %>
+<% end %>
+
+<h1>How Much Do You Like Televised Olympic Gymnastics?</h1>
+<h3>(On a scale of 1 to 10? (Ten being heart-bursting love, and one being outright hatred)</h3>
+<%= form_tag '/example_form' do %>
+  <%= label_tag '1' %>
+  <%= radio_button_tag 'one_to_ten', '1' %> </br>
+  <%= label_tag '2' %>
+  <%= radio_button_tag 'one_to_ten', '2' %> </br>
+  <%= label_tag '3' %>
+  <%= radio_button_tag 'one_to_ten', '3' %> </br>
+  <%= label_tag '4' %>
+  <%= radio_button_tag 'one_to_ten', '4' %> </br>
+  <%= label_tag '4' %>
+  <%= radio_button_tag 'one_to_ten', '4' %> </br>
+<% end %>
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- <form action="/programmers" method='post'>
+  <input type="text" name='name' value=''>
+  <input type="text" name='twitter_username' value=''>
+  <input type="text" name='twitter_pic' value=''>
+  <input type="text" name='github_username' value=''>
+  <input type="submit">
+</form> -->

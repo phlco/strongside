@@ -1,0 +1,8 @@
+<h2>Travelers</h2>
+<ul>
+<% @users.each do |user| %>
+  <li>
+    <%= user.name %>  |  <%= user.age %>  | <%= user.travel_class %>
+  </li>
+<% end %>
+</ul>

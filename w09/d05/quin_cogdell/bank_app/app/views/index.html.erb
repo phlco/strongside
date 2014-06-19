@@ -1,0 +1,16 @@
+<h1>Users</h1>
+
+<section>
+  <%= link_to('New User', '/users/new') %>
+</section>
+
+<section>
+  <%= @users.each do |user| %>
+    <section>
+      <p>Username</p> <%= user.email %>
+      <p>Username</p> <%= user.password %>
+    </section>
+  <% end %>
+</section>
+
+

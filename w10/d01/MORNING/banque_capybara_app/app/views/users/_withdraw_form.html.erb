@@ -1,0 +1,22 @@
+<input type="text" name="balance">
+<br>
+<select name="from-account">
+  <% @user.accounts.each do |account| %>
+    <option value="<%= account.id %>"><%= account.name %></option>
+  <% end %>
+</select>
+<br>
+<label for="transaction-withdraw">Withdraw</label>
+<input type="radio" name="transaction-type" value="withdraw" id="transaction-withdraw">
+<label for="transaction-transfer">Transfer</label>
+<input type="radio" name="transaction-type" value="transfer" id="transaction-transfer">
+<br>
+<select name="to-account">
+  <% @user.accounts.each do |account| %>
+    <option value="<%= account.id %>"><%= account.name %></option>
+  <% end %>
+</select>
+<br>
+<input type="text" name="memo">
+<br>
+<input type="submit" value="Confirm">

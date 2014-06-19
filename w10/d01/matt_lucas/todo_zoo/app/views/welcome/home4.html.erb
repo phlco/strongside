@@ -1,0 +1,36 @@
+<script>
+var object_of_peeps = { thang: [
+  {
+    name: "Shirly",
+    age: 47,
+    height: "3 feet"
+  },
+  {
+    name: "George",
+    age: 75,
+    height: "5 7"
+  },
+  {
+    name: "Gertrude",
+    age: 8,
+    height: "4 feet"
+  },
+  {
+    name: "Abigail",
+    age: 17,
+    height: "2 feet"
+  }
+]
+}
+</script>
+<script id="hotdog-tmp" type="text/x-handlebars-template">
+{{#each thang}}
+  <h1>{{ name }}</h1>
+  <p> {{ age }} </p>
+  <p> {{ height }} </p>
+{{/each}}
+</script>
+
+var source = $('#entry-template').html()
+template = Handlebars.compile(source)
+template("the whatever thing we are calling")

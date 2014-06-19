@@ -1,0 +1,8 @@
+<h3><%= @cat.name %></h3>
+<%= @cat.sex %> <br>
+<%= image_tag @cat.pic_url %><br>
+<%=  @cat.tag_line %> <br>
+<strong>Rating:</strong> <%= @cat.rating %> <br><br>
+
+<%= link_to 'Edit', "#{@cat.id}/edit" %> | <%= link_to 'Delete', "cats/#{@cat.id}", method: :delete %>
+

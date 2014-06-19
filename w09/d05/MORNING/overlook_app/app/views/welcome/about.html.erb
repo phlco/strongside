@@ -1,0 +1,16 @@
+<% if flash[:thanks] %>
+  <p><%= flash[:thanks] %></p>
+<% end %>
+
+<h1 id="about_us">About Us</h1>
+<img src="overlook.png" alt="The Overlook Hotel">
+
+<form action="/entries" method="post">
+  <label for="guestbook">Guestbook</label>
+  <input type="text" id="guestbook" name="message">
+  <input type="submit" value="Sign Guestbook">
+</form>
+
+<% @entries.each do |entry| %>
+  <%= entry.message %>
+<% end %>

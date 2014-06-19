@@ -1,0 +1,11 @@
+<div id="sign-in">
+  <%= flash[:notice] %>
+  <h1>Sign In</h1>
+  <form action="/sessions" method="post">
+    <label for="email">Email</label>
+    <input type="text" name="Email">
+    <label for="password">Password</label>
+    <input type="password" name="Password">
+    <input type="submit" value="Sign In">
+  </form>
+</div>

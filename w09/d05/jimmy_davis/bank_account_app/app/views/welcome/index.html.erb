@@ -1,0 +1,22 @@
+<h1>Bank</h1>
+
+<h3>Register</h3>
+<%= form_for(@user) do |f| %>
+  <%= f.label :username %>
+  <%= f.text_field :username %>
+  <%= f.label :password %>
+  <%= f.password_field :password %>
+  <%= f.submit "Register" %>
+<% end %>
+
+
+<h3>Create Accoubt</h3>
+<%= form_for(@account) do |f| %>
+  <%= f.label :name %>
+  <%= f.text_field :name %>
+  <%= f.submit "Submit" %>
+<% end %>
+
+<a href="/transactions">Make A Transaction</a>
+
+

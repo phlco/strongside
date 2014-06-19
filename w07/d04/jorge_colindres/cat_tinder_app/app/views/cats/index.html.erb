@@ -1,0 +1,22 @@
+<%= link_to 'Create New Cat', new_cat_path %>
+<br>
+<br>
+<table class="cats-table">
+  <tr colspan="7">
+    <th>Name</th>
+    <th>Age</th>
+    <th>Tag Line</th>
+    <th>Score</th>
+  </tr>
+  <% @cats.each do |cat| %>
+  <tr>
+    <td><%= cat.name %></td>
+    <td><%= cat.age %></td>
+    <td><%= cat.tag_line %></td>
+    <td><%= cat.score %></td>
+    <td><%= link_to 'Show', cat_path(cat)%></td>
+    <td><%= link_to 'Edit', edit_cat_path(cat)%></td>
+    <td><%= link_to 'Delete', "cats/#{cat.id}", method: 'delete' %></td>
+  </tr>
+  <% end %>
+</table>

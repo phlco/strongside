@@ -1,0 +1,12 @@
+%h1 Sorting Quiz
+#quiz
+  %input{name: "numbers", type: "text"}
+  %button#sort sort
+  %button#random Random Ajax Numbers
+#output
+
+:javascript
+  $(function(){
+    $('#sort').click(sortNumbers);
+    $("#random").click(randomNumbers);
+  });

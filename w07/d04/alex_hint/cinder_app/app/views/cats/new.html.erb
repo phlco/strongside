@@ -1,0 +1,10 @@
+<h1>Create a new cat</h1>
+
+<%= form_for(@cat) do |f| %>
+  <%= f.text_field :name, placeholder: "Name"%><br>
+  <%= f.text_field :age, placeholder: "Age" %><br>
+  <%= f.text_field :tagline, placeholder: "Tagline" %><br>
+  <%= f.text_field :image, placeholder: "Image URL" %><br><br>
+  <%= f.submit "Create" %>
+
+<% end %>

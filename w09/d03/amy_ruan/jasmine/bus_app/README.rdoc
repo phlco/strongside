@@ -1,0 +1,1 @@
+{<img src="https://travis-ci.org/ruan20a/jasmine_first_app.png?branch=master" alt="Build Status" />}[https://travis-ci.org/ruan20a/jasmine_first_app]

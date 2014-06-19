@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>MarauderApp</title>
+  <%= stylesheet_link_tag    "application", :media => "all" %>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+  <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=<% ENV['GOOGLE_API_KEY'] %>&sensor=true">
+  <%= javascript_include_tag "application" %>
+  </script>
+
+
+  <%= csrf_meta_tags %>
+</head>
+<body>
+
+<%= yield %>
+
+</body>
+</html>

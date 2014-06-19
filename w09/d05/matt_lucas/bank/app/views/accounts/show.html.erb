@@ -1,0 +1,11 @@
+<br><br>
+
+<% @account.versions.each do | version | %>
+  <li><%= version["object"] %></li>
+<% end %>
+
+
+<% binding.pry %>
+<% @account.versions(&:balance).map do |balance| %>
+  <li><%= balance %></li>
+<% end %>

@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>BanqueCapybaraApp</title>
+  <%= stylesheet_link_tag    "application", :media => "all" %>
+  <%= javascript_include_tag "application" %>
+  <%= csrf_meta_tags %>
+</head>
+<body>
+
+<div class="wrapper">
+  <nav style="text-align:right;">
+    <% if session[:user_id].nil? %>
+      <%= link_to 'Sign up', signup_path %>
+      <%= link_to 'Login', login_path %>
+    <% else %>
+      <%= link_to 'Logout', logout_path %>
+    <% end %>
+  </nav>
+  <%= yield %>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,19 @@
+
+<h2>make a user</h2>
+<%= form_for @user do |f| %>
+<%= f.text_field :name, :placeholder => "name" %>
+<%= f.text_field :email, :placeholder => "email" %>
+<%= f.submit %>
+<% end %>
+
+<br>
+
+<div id="notice">
+</div>
+
+<div id="map-canvas">
+</div>
+
+<br>
+
+<input type="button" id="drop-pin" value="drop pin">

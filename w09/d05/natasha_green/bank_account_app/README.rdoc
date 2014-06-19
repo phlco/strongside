@@ -1,0 +1,17 @@
+<%form_for(@account) do |f|  %>
+<div class="field">
+<%= f.label :withdraw%>
+<%= f.text_field :withdraw%>
+</div>
+<div class="actions">
+<%= f.submit %>
+<% end %>
+
+<%form_for(@account) do |f|  %>
+<div class="field">
+<%= f.label :deposit%>
+<%= f.text :deposit%>
+</div>
+<div class="actions">
+<%= f.submit %>
+<% end %>

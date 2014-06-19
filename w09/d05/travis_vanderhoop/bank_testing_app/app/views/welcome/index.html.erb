@@ -1,0 +1,14 @@
+<h1>Welcome#index</h1>
+<p>Find me in app/views/welcome/index.html.erb</p>
+
+<h2>Accounts</h2>
+<ul id="user-accounts-list">
+  <% @accounts.each do |account| %>
+    <% counter = 1 %>
+    <li>Account <%= counter %>, balance: <%= account.balance %></li>
+    <% counter += 1 %>
+<% end %>
+</ul>
+<button id="create-new-account">Create New Account</button>
+
+  <%= render "account_form" %>

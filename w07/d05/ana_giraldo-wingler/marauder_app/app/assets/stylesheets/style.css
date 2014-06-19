@@ -1,0 +1,10 @@
+body{
+  font-family: 'helvetica';
+  padding: 3%;
+}
+
+#map-canvas {
+  height: 400px;
+  width: 960px;
+  padding: 3%;
+}

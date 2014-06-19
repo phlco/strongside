@@ -1,0 +1,10 @@
+<h1>Welcome, <%= @user.email %></h1>
+<a href="/accounts/new">Create New Account</a>
+
+<% if @user.accounts.size > 0 %>
+<%= @user.accounts.each do |account| %>
+<a href="/accounts/<%= account.id %>">Account <%= account.id %></a>
+<% end %>
+<% else %>
+You have no accounts.
+<% end %>

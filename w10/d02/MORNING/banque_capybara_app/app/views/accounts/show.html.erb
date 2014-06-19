@@ -1,0 +1,22 @@
+<h1><%= @account.name %></h1>
+<table class="history">
+  <thead>
+    <tr>
+      <td>Date</td>
+      <td>Type</td>
+      <td>Amount</td>
+      <td>Memo</td>
+    </tr>
+  </thead>
+  <tbody>
+  <% @account.account_transactions.each do |transaction| %>
+    <tr>
+      <td><%= transaction.created_at.strftime("%m/%d/%Y") %></td>
+      <td><%= transaction.action %></td>
+      <td><%= transaction.amount %></td>
+      <td><%= transaction.memo %></td>
+    </tr>
+  <% end %>
+  </tbody>
+</table>
+<p>Total: <strong><%= number_to_currency @account.balance %></strong></p>

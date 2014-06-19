@@ -1,0 +1,31 @@
+body {
+  cursor: crosshair;
+}
+
+.tile {
+  height: 20px;
+  width: 20px;
+  background-color: #D1D1D1;
+  float: left;
+}
+
+.tile-wrapper {
+  width: 1000px;
+}
+
+.green {
+  background-color: #63aa72;
+}
+
+.paint-green {
+  background-color: #63aa72;
+}
+
+.palette {
+  display: block;
+}
+
+.swatch {
+  height: 50px;
+  width: 50px;
+}

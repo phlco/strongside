@@ -1,0 +1,15 @@
+<h2>
+  <%= @programmer.name %>
+</h2>
+
+<%= form_tag "/programmer/#{@programmer.id}" do %>
+  <%= label_tag 'Name' %>
+  <%= text_field_tag "name", @programmer.name %>
+  <%= label_tag 'Twitter Picture' %>
+  <%= text_field_tag "twitter_pic", @programmer.twitter_pic %>
+  <%= label_tag 'Twitter Username' %>
+  <%= text_field_tag "twitter_username", @programmer.twitter_username %>
+  <%= label_tag 'Github Username' %>
+  <%= text_field_tag "github_username", @programmer.github_username %>
+  <%= submit_tag "Update" %>
+<% end %>

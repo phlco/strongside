@@ -1,0 +1,6 @@
+Name: <%= @programmer.name %>
+Twitter Username: <%= @programmer.twitter_username %>
+<img src="<%= @programmer.twitter_pic %>">
+<% if @programmer.github_username != nil %>
+Github Username: <%= @programmer.github_username %>
+<% end %>

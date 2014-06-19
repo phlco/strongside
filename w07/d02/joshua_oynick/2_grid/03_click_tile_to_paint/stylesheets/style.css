@@ -1,0 +1,17 @@
+.tile {
+  display: inline-block;
+
+  border-style: solid;
+  border-left-width: 1px;
+  border-color: white;
+  background-color: #ededed;
+}
+
+.highlighted {
+  background-color: #79ed47;
+}
+
+/*NEW, this is a separate class so that it doesn't need to interfere with the functionality of highlighted (ie instead of persisting the class highlighted, it is easier to persist another class*/
+.painted {
+  background-color: #79ed47;
+}

@@ -1,0 +1,14 @@
+  <h1>Sign up for CatBook</h1>
+
+<%= form_for(@cat) do |f| %>
+<%= f.label :name %> <br />
+<%= f.text_field :name %> <br />
+<%= f.label :tagline %> <br />
+<%= f.text_field :tagline %> <br />
+<%= f.label :age %> <br />
+<%= f.text_field :age %> <br />
+<%= f.label :image %> <br />
+<%= f.text_field :image %> <br />
+
+<%=f.submit%>
+<%end%>

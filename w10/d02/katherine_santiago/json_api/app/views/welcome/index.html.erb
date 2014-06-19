@@ -1,0 +1,41 @@
+<h1>Candy Machine App</h1>
+
+<div id ="page"></div>
+
+<div class="container">
+  <h1>User Manager</h1>
+  <hr />
+  <div class="page"></div>
+</div>
+
+<script id="machine-list-template" type="text/x-handlebars-template">
+  <a class='btn btn-primary' href='#/new'>create new machine</a>
+  <hr \>
+  <table class="table striped">
+    <thead>
+    <tr>
+    <th>Location</th>
+    <th>Money</th>
+    <th>Balls</th>
+    <th>Price</th>
+    <th></th>
+    </tr>
+    </thead>
+
+    <tbody>
+      {{#each machines}}
+        <tr>
+          <td>{{location}}</td>
+          <td>{{money}}</td>
+          <td>{{candy}}</td>
+          <td>{{candy_price}}</td>
+          <td>
+            <a class="btn" href='#/sell/{{id}}'>Sell</a>
+            <a class="btn" href='#/refill/{{id}}'>Refill</a>
+            <a class="btn" href='#/takemoney/{{id}}'>Take</a>
+          </td>
+        </tr>
+      {{/each}}
+    </tbody>
+  </table>
+</script>

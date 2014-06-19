@@ -1,0 +1,33 @@
+<h1>Your Account</h1>
+
+<p>
+  <b>Email:</b>
+  <%= @user.email %>
+</p>
+
+
+<p>
+  <b>Total Balance:</b>
+  <span id="total-balance">
+    <%= number_to_currency(@user.get_total_balance, :unit => "$") %>
+  </span>
+  <%= link_to 'Deposit', user_deposit_path %>
+</p>
+
+<p>
+  <b>Your Bank Accounts</b>
+  <%= link_to "Add Account", new_user_bank_account_path(@user) %>
+  <ul>
+    <% @user.bank_accounts.each do |account| %>
+    <li class="bank-account">
+      <%= link_to account.name, user_bank_account_path(@user, account) %>
+      <span><%= number_to_currency(account.balance, :unit => "$") %></span>
+    </li>
+    <% end %>
+  </ul>
+  <a href="">Withdraws/Transfers</a>
+</p>
+
+<%= javascript_tag do %>
+  this.currentUserId = "<%=j @user.id.to_s %>";
+<% end %>

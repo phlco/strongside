@@ -1,0 +1,12 @@
+<form action="/entries", method="post">
+  <label for="guestbook">Guestbook</label>
+  <input type="text" id='register' name="message">
+  <input type="submit" value="Sign Guestbook">
+</form>
+
+<%= form_for @user do |f| %>
+  <%= f.label :name %>
+  <%= f.text_field :name %>
+  <%= f.submit %>
+<% end %>
+<p id="welcome"></p>

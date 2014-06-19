@@ -1,0 +1,22 @@
+<h1>Create a new Cat</h1>
+<section>
+<%= form_for @cat do |f| %>
+<div>
+  <%= f.label :name %>
+  <%= f.text_field :name %>
+</div>
+<div>
+  <%= f.label :age %>
+  <%= f.text_field :age %>
+</div>
+<div>
+  <%= f.label :tag_line %>
+  <%= f.text_field :tag_line %>
+</div>
+<div>
+  <%= f.label :image_url %>
+  <%= f.text_field :image_url %>
+</div>
+<%= f.submit %>
+<% end %>
+</section>

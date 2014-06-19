@@ -1,0 +1,31 @@
+
+$pinker: #f16da4;
+$aqua: complement($pinker);
+
+body {
+  background-color: darken($aqua, 20%);
+  color: darken($pinker, 20%);
+  font-family: helvetica;
+  font-size: 1.5em;
+}
+
+h1 {
+  border: 10px solid lighten($pinker, 20%);
+  border-radius: 20px;
+  width: 400px;
+  color: invert($pinker);
+  background-color: lighten($aqua, 10%);
+  padding: 20px
+}
+
+p {
+  background-color: $aqua;
+  width: 600px;
+  padding: 20px;
+  border: 3px solid lighten(invert($aqua), 20%);
+  border-radius: 3px;
+
+&:hover {
+  background-color: darken($aqua, 40%);
+  color: lighten($pinker, 10%)
+}

@@ -1,0 +1,9 @@
+body {
+  width: 90%;
+  padding: 3%;
+  font-family: 'helvetica neue';
+}
+
+h1 {
+  text-transform: uppercase;
+}

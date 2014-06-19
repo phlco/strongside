@@ -1,0 +1,27 @@
+Trainer
+  - properties
+    - email
+    - password
+    - password confirmation
+    - I want people to be able to log in with a username and password
+      (bcrypt)
+      - user should also have an email
+        - this email should be unique
+      - password needs to be at least 6 character
+  - has_many pokemons
+
+Pokemon
+  - properties
+    - name
+    - species
+    - health
+      - starts at 100 and is capped at 100
+    - energy
+      - starts at 100 and is capped at 100
+  - methods
+    - recover
+      - increases your health by 10
+    - attack(other_pokemon)
+      - your energy goes down by 10
+      - health of other pokemon goes down by 10
+  - belongs_to :trainer

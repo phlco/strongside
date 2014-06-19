@@ -1,0 +1,14 @@
+<h1 id = "about_us">About Us</h1>
+<img src='overlook.png'/>
+
+<div class="entries">
+  <%@entries.each do |e|%>
+  <li><%=e.messages%></li>
+  <%end%>
+</div>
+
+<%= form_tag('/guestbook') do %>
+<div id = "guestbook">
+  <%= text_area_tag 'Guestbook' %><br>
+<%= submit_tag 'Sign Guestbook' %></div>
+<% end %>

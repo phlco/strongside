@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Users</title>
+  <%= stylesheet_link_tag    "application", :media => "all" %>
+
+  <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/1.8.2/jquery.min.js" type="text/javascript"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/underscore.js/1.4.2/underscore-min.js" type="text/javascript"></script>
+  <script>
+    //  NOTE: http://stackoverflow.com/questions/7514922/rails-with-underscore-js-templates
+    _.templateSettings = {
+        interpolate: /\{\{\=(.+?)\}\}/g,
+        evaluate: /\{\{(.+?)\}\}/g
+    };
+  </script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/backbone.js/0.9.2/backbone-min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/handlebars.js/1.1.2/handlebars.js"></script>
+
+  <script>
+    $.ajaxPrefilter( function( options, originalOptions, jqXHR ) {
+       options.url = 'http://localhost:3000' + options.url;
+       options.crossDomain = true;
+     });
+  </script>
+  <script>
+  function htmlEncode(value){
+  return $('<div/>').text(value).html();
+}
+</script>
+
+<script src="assets/films.js"></script>
+  <%= javascript_include_tag "application" %>
+  <%= csrf_meta_tags %>
+
+  <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css" rel="stylesheet">
+
+</head>
+<body>
+
+
+
+
+  <%= yield %>
+
+</body>
+</html>

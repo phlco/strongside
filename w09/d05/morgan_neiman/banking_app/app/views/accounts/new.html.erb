@@ -1,0 +1,6 @@
+<h1>Create Account</h1>
+<%= form_for @account do |f| %>
+<%= f.label :money, "Amount" %>
+<%= f.text_field :money %>
+<%= f.submit "Create Account" %>
+<% end %>

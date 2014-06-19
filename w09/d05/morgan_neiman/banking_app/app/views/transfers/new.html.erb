@@ -1,0 +1,11 @@
+<%= flash[:notice] %>
+
+<form action="/accounts/<%= params[:account_id] %>/transfers" method="post">
+  <label for="kind">Kind (Withdraw, Deposit or Transfer are Valid)</label>
+  <input type="text" name="Kind">
+  <label for="amount">Amount</label>
+  <input type="text" name="Amount">
+  <label for="recipient">Recipient Account ID (If Transfer)</label>
+  <input type="text" name="Recipient">
+  <input type="submit" value="Complete Transfer">
+</form>

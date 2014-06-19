@@ -1,0 +1,23 @@
+/* this is a comment*/
+body {
+  background: #b5af52; }
+
+.title {
+  font-size: 2em; }
+
+.button {
+  background: #ea4c88;
+  color: white;
+  text-transform: uppercase;
+  width: 25%;
+  height: 10%;
+  font-size: 1.25em;
+  border: none;
+  line-height: 50px; }
+  .button:hover {
+    background: #e51e6a; }
+
+.foo div {
+  text-align: center; }
+.foo.pickles {
+  color: red; }

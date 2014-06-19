@@ -1,0 +1,7 @@
+<h1>CatBook</h1>
+
+<% @cats.each do |cat| %>
+<p><%= link_to cat.name, cat_path(cat) %><br>
+<%= link_to "Edit", edit_cat_path(cat) %> |
+<%= link_to 'Delete', cat, method: :delete%> </p>
+<% end %>

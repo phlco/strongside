@@ -1,0 +1,4 @@
+<%= form_for @refugee, url: {action: "create"} do |refugee_form| %>
+  <%= refugee_form.text_field :name %>
+  <%= refugee_form.submit%>
+<% end %>

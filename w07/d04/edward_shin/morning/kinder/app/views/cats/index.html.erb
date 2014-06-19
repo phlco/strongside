@@ -1,0 +1,13 @@
+<p>Hollaback</p>
+<a href="/cats/new"><button>Create a Cat</button></a>
+<ol>
+<%@cats.each do |cat|%>
+  <li>Name: <%=cat.name%><br></li>
+  Age: <%=cat.age%><br>
+  Tag line: <%=cat.tag_line%><br>
+  Rating: <%=cat.rating%><br>
+  <img src="<%=cat.image_url%>" alt="">
+  <br>
+  <br>
+<%end%>
+</ol>

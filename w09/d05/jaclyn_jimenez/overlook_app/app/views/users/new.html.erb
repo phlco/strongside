@@ -1,0 +1,6 @@
+<!-- create form here -->
+<%=form_for @user do |f|%>
+  <%= f.label :name, 'Name' %>
+  <%= f.text_field :name %><br />
+  <%= f.submit "Register" %>
+<% end %>

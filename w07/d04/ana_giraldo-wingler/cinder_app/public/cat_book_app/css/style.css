@@ -1,0 +1,23 @@
+body {
+  font-family: 'helvetica';
+  padding: 3%;
+}
+
+.cat-form {
+  text-align: right;
+}
+
+h1 {
+  padding: 0px;
+  margin: 0px;
+}
+
+.cat {
+  width: 400px;
+  height: 400px;
+  float: left;
+}
+
+img {
+  height: 70%;
+}

@@ -1,0 +1,469 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Riding Rails 4</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <link href='http://fonts.googleapis.com/css?family=Yanone+Kaffeesatz:700|Raleway:400,500' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <textarea id="source">
+class: center, middle
+
+# Riding Rails 4
+---
+
+# deprecation policy
+- Rails 3.2.x
+    - new deprecation warnings
+- Rails 4.0.0
+    - new features
+    - new deprecation warnings
+    - nothing is removed
+    - easy upgrade
+- Rails 4.0.x
+    - no new features
+    - no new deprecation warnings
+- Rails 4.1
+    - new features
+    - removed deprecated stuff
+
+---
+class: center
+
+# no mo' assets group
+
+![rails 4 gemfile](img/gemfile.png)
+
+---
+
+# turbolinks
+- only the body and title are replaced
+- The more CSS and Javascript you have, the bigger the benefit of:
+    - not throwing away the browser instance
+    - not downloading CSS/JS over and over
+    - not recompiling all of it for every page
+- problem:
+  ```js
+  $(document).ready(function() {
+      alert("DOM is ready!");
+  });
+  ```
+  - listen for the `page:load` event
+      ```js
+      //as a matter of fact, listen for both!
+      $(document).on('ready page:load', function(){
+          alert("DOM is ready!");
+      });
+      ```
+
+???
+It works by fetching the clicked link asynchronously and then replacing the entire contents of the document body with the new page.
+
+- benefit: save time on the client-side by not having to check for existing css, js, and possibly images
+---
+# tip: jquery-turbolinks
+
+Alternatively, we can include `jquery-turbolinks`, which will will ensure that ready() will only fire after "page:load"
+https://github.com/kossnocorp/jquery.turbolinks
+
+```
+# Gemfile
+gem 'jquery-turbolinks'
+```
+
+```
+# assets/javascripts/application.js
+//= require jquery
+//= require jquery.turbolinks  #order is important!
+//= require_ujs
+//= require turbolinks
+```
+
+---
+# turbolinks events
+
+- `page:fetch` - starting to fetch the target page (only called if loading fresh, not from cache).
+- `page:load` - fetched page is being retrieved fresh from the server
+- `page:restore` - fetched page is being retrieved from the 10-slot client-side cache
+- `page:change` - page has changed to the newly fetched version
+---
+class: middle, center
+# selective disabling
+
+```html
+<a href="/post" data-no-turbolink="true">Posts</a>
+```
+
+???
+Client-side frameworks: Turbolinks may not play nicely with other client-side frameworks like Backbone, Angular, Knockout, Ember, etc.
+---
+
+# mass-assignment protection
+
+```rails3
+# app/models/kid.rb
+class Kid < ActiveRecord::Base
+  # Only allow the following attributes to be mass-assigned
+  attr_accessible :name, :age, :address, :girl #, :good
+end
+
+# app/controllers/kids_controller.rb
+class KidsController < ApplicationController
+  def create
+    @kid = Kid.new(params[:kid])
+    if @kid.save
+      redirect_to root_url
+    else
+      render action: "new"
+    end
+  end
+end
+```
+
+???
+In Rails 3, the model is responsible for whitelisting parameters
+
+whitelists attributes, allowing them
+to be set via mass assignment
+
+---
+# strong_parameters
+
+- `attr_accessible` and `attr_protected` removed from rails core and extracted to the `protected_attributes` gem
+- replaced by `strong_parameters`
+- Reason:
+    - pass responsibility to controllers instead of models
+
+---
+# strong_parameters
+
+```rails4
+# app/models/kid.rb
+class Kid < ActiveRecord::Base
+end
+
+# app/controllers/kids_controller.rb
+class KidsController < ApplicationController
+  def create
+    @kid.create(params.require(:kid).permit(:name, :age))
+  end
+  # Kid.create(params[:kid]) =>
+  # ActiveModel::ForbiddenAttributes
+end
+```
+
+--
+**require(key)** - ensures that a parameter is present. If it's present, returns the parameter at the given key, otherwise raises an ActionController::ParameterMissing error.
+
+**permit(filters)** - Returns the new ActionController::Parameters instance that includes only the given filters and sets the permitted attribute for the object to true. This is useful for limiting which attributes should be allowed for mass updating.
+???
+the model no longer handles
+parameter whitelisting
+
+params.require performs parameter
+validation, also checks parameter types
+
+Using permit strips out anything that is not permitted, but won't mind if a permitted attribute is missing
+
+---
+# strong_parameters
+
+Use a private method to keep duplication between actions at bay.
+
+```rails4
+# app/controllers/kids_controller.rb
+class KidsController < ApplicationController
+  def create
+    @kid.create(kid_params)
+  end
+
+  def update
+    @kid.update(kid_params)
+  end
+
+  private
+    def kid_params
+      params.require(:kid).permit(:name, :age)
+    end
+end
+```
+
+---
+# protected_attributes
+
+```
+class User < ActiveRecord::Base
+  attr_accessible :name
+end
+```
+
+```
+# Gemfile
+gem 'protected_attributes'
+```
+
+```
+# application.rb
+config.active_record.whitelist_attributes = true
+```
+
+---
+
+# match routes
+
+```rails3
+match "/toys/:id/purchase", to: "toys#purchase"
+```
+
+- `match` responds to all HTTP verbs (POST, PUT, DELETE, and GET)
+- <b> problem: </b>
+    - potential cross site request forgery (CSRF)
+    - CSRF protection already exists in Rails but not for the `GET` method
+---
+# solution
+
+```rails4
+get "/toys/:id/purchase", to: "toys#purchase"
+
+match "toys/:id/purchase", to: "toys#purchase", via: :get
+
+match "toys/:id/purchase", to: "toys#purchase", via: [:get, :post]
+```
+Rails 4 forces a verb to be present on `match` routes
+
+---
+# before_filter is now before_action
+
+```rails4
+before_action :set_user, :except => [:index, :new, :create}
+before_action :require_the_president, :only => [:fire_the_missiles]
+```
+
+> “To avoid the misconception that these callbacks are only suited for transforming or halting the response. With the new style, it’s more inviting to use them as they were intended, such as setting shared ivars for views.” - _DHH_
+
+???
+The old *_filter callbacks still work and are not deprecated; so, you can still use them if you wish
+---
+
+# routing concerns
+
+```rails3
+# config/routes.rb
+resources :messages do
+  resources :comments
+  resources :categories
+  resources :tags
+end
+
+resources :posts do
+  resources :comments
+  resources :categories
+  resources :tags
+end
+
+resources :items do
+  resources :comments
+  resources :categories
+  resources :tags
+end
+```
+
+???
+helps reduce code duplication on your routes file by allowing you to declare common routes that can be reused inside other resources and routes.
+---
+
+# routing concerns
+
+```rails4
+concern :sociable do
+  resources :comments
+  resources :categories
+  resources :tags
+end
+
+resources :messages, concerns: sociable
+resources :posts, concerns: sociable
+resources :items, concerns: sociable
+```
+
+???
+Routing Concerns is an attempt to DRY up your config/routes.rb. The basic idea is to define common sub-resources (like comments) as concerns and include them in other resources/routes.
+---
+# routing concerns
+
+```rails4
+# config/routes.rb
+concern :sociable do
+  resources :comments
+  resources :categories
+  resources :tags
+end
+
+resources [:messages, :posts, :items], concerns: sociable
+```
+---
+# model concerns
+
+.hlf[
+```
+# app/models/message.rb
+class Message < ActiveRecord::Base
+  def trash
+    update_attribute :trashed, true
+  end
+end
+
+# app/models/user.rb
+class User < ActiveRecord::Base
+  def trash
+    update_attribute :trashed, true
+  end
+end
+```
+]
+--
+.hlf[
+```
+# app/models/concerns/trashable.rb
+module Trashable
+  extend ActiveSupport::Concern
+
+  def trash
+    update_attribute :trashed, true
+  end
+end
+```
+]
+
+---
+# model concerns
+
+.hlf[
+```
+# app/models/message.rb
+class Message < ActiveRecord::Base
+  include Trashable
+end
+
+# app/models/user.rb
+class User < ActiveRecord::Base
+  include Trashable
+end
+```
+]
+
+.hlf[
+```
+# app/models/concerns/trashable.rb
+module Trashable
+  extend ActiveSupport::Concern
+
+  def trash
+    update_attribute :trashed, true
+  end
+end
+```
+]
+
+???
+
+The extend ActiveSupport::Concern tells rails that we are creating a concern.
+---
+
+class: center, middle
+# PATCH verb
+---
+# PUT
+
+- resource creation or replacement at a given URL
+- must send a complete representation of the resource
+
+---
+# PATCH
+
+- PATCH is the primary method for updates in Rails 4.0
+- allows full and partial updates
+- both PUT and PATCH are routed to `update`
+
+```
+class PostsController < ApplicationController
+  # PATCH/PUT /posts/1
+  # PATCH/PUT /posts/1.json
+  def update
+    @post = Post.find(params[:id])
+  end
+end
+```
+
+???
+Previous versions of Rails used PUT in place of PATCH, and Rails 4.0 still supports this usage, but PATCH matches the intended HTTP usage better and is preferred for new applications. So GET, POST, PUT, DELETE is now GET, POST, PATCH, DELETE.
+
+---
+# live streaming
+
+- Use Puma or Rainbows!
+
+```
+# Gemfile
+gem 'puma'
+```
+
+```
+class MyController < ActionController::Base
+  include ActionController::Live
+
+  def stream
+    response.headers['Content-Type'] = 'text/event-stream'
+    10.times {
+      response.stream.write "hello world\n"
+        sleep 1
+    }
+    response.stream.close
+  end
+end
+```
+---
+class: center, middle
+
+# Tiny-Chat Rails Streaming Example
+http://tiny-chat.herokuapp.com/
+
+Article: http://robots.thoughtbot.com/chat-example-app-using-server-sent-events
+
+---
+# other stuff
+
+- thread safety
+- custom flash types
+- controller-wide e-tags
+- ActiveRecord#all
+- no more observers/sweepers
+- encrypted cookies
+- scopes require proc objects
+- html5 form helpers
+- index page controller
+---
+# reference
+
+- http://guides.rubyonrails.org/4_0_release_notes.html
+- http://net.tutsplus.com/tutorials/ruby/digging-into-rails-4/
+- http://blog.sensible.io/2013/08/17/strong-parameters-by-example.html
+- http://richonrails.com/articles/rails-4-code-concerns-in-active-record-models
+- http://dev.mensfeld.pl/2013/06/upgrading-to-rails-4-0-from-rails-3-2-test-case-part-i-preparations-configuration-gems/
+- http://railscasts.com/episodes/400-what-s-new-in-rails-4
+- http://railscasts.com/episodes/415-upgrading-to-rails-4
+- http://robots.thoughtbot.com/chat-example-app-using-server-sent-events
+- http://ready4rails4.net/
+    </textarea>
+    <script src="remark.min.js" type="text/javascript">
+    </script>
+    <script type="text/javascript">
+      var slideshow = remark.create({
+        highlightLanguage: "ruby",
+        highlightStyle: "tomorrow",
+        ratio: '16:9'
+      });
+    </script>
+  </body>
+</html>

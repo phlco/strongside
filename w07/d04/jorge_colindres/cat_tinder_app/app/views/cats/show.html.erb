@@ -1,0 +1,7 @@
+<img src="<%= @cat.img_url %>" alt="<%= @cat.name %>">
+<div>Name: <%= @cat.name %></div>
+<div>Age: <%= @cat.age %></div>
+<div>Tagline: <%= @cat.tag_line %></div>
+<div>Score: <%= @cat.score %></div>
+<%= button_to 'Vote Up', cat_path(@cat), method: 'put', name: 'vote' %>
+<%= button_to 'Vote Down', cat_path(@cat), method: 'put', name: 'vote' %>

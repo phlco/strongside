@@ -1,0 +1,13 @@
+/*Create a style.css file and give #map-canvas a height of 400px and width of 960px with css.*/
+
+#map-canvas {
+  height: 400px;
+  width: 960px;
+  margin-top: 20px;
+  background-color: #ecf0f1;
+}
+
+#drop-pin {
+  margin-top: 20px;
+
+}

@@ -1,0 +1,14 @@
+<%= form_for(@user) do |f| %>
+  <%= field_set_tag "Sign up" do %>
+    <%= f.label :email %>
+    <%= f.text_field :email %>
+    <%= tag 'br' %>
+    <%= f.label :password %>
+    <%= f.password_field :password %>
+    <%= tag 'br' %>
+    <%= f.label :password_confirmation, "Password Confirmation" %>
+    <%= f.password_field :password_confirmation %>
+    <%= tag 'br' %>
+    <%= f.submit 'Sign up' %>
+  <% end %>
+<% end %>

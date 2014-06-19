@@ -1,0 +1,7 @@
+<%= flash[:notice] %>
+Account <%= @account.id %>
+
+Current funds: <%= @account.money %>
+
+<a href="/accounts/<%= @account.id %>/transfers/new">Transfer Money</a>
+<%= link_to "Delete Account", "/accounts/#{@account.id}", :method => :delete %>

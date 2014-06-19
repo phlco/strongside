@@ -1,0 +1,15 @@
+<h1>hello to the cat</h1>
+
+  <%= @cat.name %><br>
+  <%= @cat.age %><br>
+  <%= @cat.tagline %><br>
+  <img src="<%= @cat.image %>">
+<br>
+<!-- <a href="/">Go Home</a><br>
+<a href="/cats/<%= @cat.id %>/edit">Edit</a><br>
+<a href="/">Delete</a> -->
+
+<%= link_to("Home", root_path) %>
+<%= link_to("Edit", edit_cat_path) %>
+<!-- not working delete -->
+<%#= link_to("Delete", "/cats/@cat.id", method: delete) %>

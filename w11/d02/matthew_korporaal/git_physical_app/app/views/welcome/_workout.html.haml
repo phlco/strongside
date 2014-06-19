@@ -1,0 +1,8 @@
+%script#workout-template{ type: "text/x-handlebars-template" }
+  %ul
+    {{#each exercises}}
+    %div
+      %li Exercise:   {{name}}
+      %li Calories:   {{calories}}
+      %li Difficulty: {{difficulty}}
+    {{/each}}

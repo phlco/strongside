@@ -1,0 +1,17 @@
+<h1>Kick Hash Students</h1>
+
+<% @students.each do |student| %>
+<div class="students_index">
+  <b>Name:</b> <%= student.name %> <br>
+  <b>Email:</b> <%= student.email %> <br>
+  <img src="<%= student.image_url %>" alt=""> <br>
+  <%= link_to 'Show', student %> |
+  <%= link_to 'Edit', edit_student_path(student) %> |
+  <%= link_to 'Destroy', student, method: :delete, data: { confirm: 'Are you sure?' } %> <br><br>
+</div>
+<% end %>
+<br>
+<br>
+<br>
+
+<%= link_to 'New Student', new_student_path %>

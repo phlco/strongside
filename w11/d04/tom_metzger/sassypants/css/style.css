@@ -1,0 +1,9 @@
+body {
+  background: #222222; }
+
+.button {
+  background-color: #ea4c88;
+  font-size: 14;
+  line-height: 2em; }
+  .button:hover {
+    background: #5f0b2b; }

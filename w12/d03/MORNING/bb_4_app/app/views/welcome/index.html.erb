@@ -1,0 +1,31 @@
+<div id="main">
+  <h1>Welcome</h1>
+
+  <button id="signup_button">Sign up</button>
+  <button id="login_button">Login</button>
+  <div id="errors"></div>
+
+  <div id="signup_form" style="display: none;">
+    <!-- form#new_user -->
+    <%= form_for(User.new) do |f| %>
+      <%= f.label           :email %>
+      <%= f.text_field      :email %>
+      <%= f.label           :password %>
+      <%= f.password_field  :password %>
+      <%= f.label           :password_confirmation %>
+      <%= f.password_field  :password_confirmation %>
+      <%= f.submit %>
+    <% end %>
+  </div><!-- #signup_form -->
+
+  <div id="login_form" style="display: none;">
+    <%= form_tag("/login") do %>
+      <%= label_tag           :email %>
+      <%= text_field_tag      :email %>
+      <%= label_tag           :password %>
+      <%= password_field_tag  :password %>
+      <%= submit_tag          "Login" %>
+    <% end %>
+  </div><!-- #login_form -->
+
+</div><!-- #main -->

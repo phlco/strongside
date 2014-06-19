@@ -1,0 +1,235 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+  <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/2.1.1/css/bootstrap.min.css">
+</head>
+<body>
+
+  <div class="container">
+    <h1>User Manager</h1>
+    <hr />
+    <div class="page"></div>
+  </div>
+
+
+  <!-- type template stops the brwoser from rendering it -->
+  <script type="text/template" id="user-list-template">
+    <a href="#/new" class="btn btn-pirmary">New User</a>
+    <hr/>
+    <table class="table striped">
+      <thead>
+       <!-- the head of the table sets the labels -->
+        <tr>
+          <th>First Name</th>
+          <th>Last Name</th>
+          <th>Age</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+         <!--//  the body of the template will have the templating function and will populate the contents of the table dynamically thanks to the templating library -->
+        <% _.each(users, function(user) { %>
+          <tr>
+            <td> <%= user.get("firstname") %> </td>
+            <td> <%= user.get("lastname") %> </td>
+            <td> <%= user.get("age") %> </td>
+            <td><a href='#/edit/<%= user.id %>' class= "btn">Edit</a></td>
+          </tr>
+        <% }); %>
+      </tbody>
+    </table>
+  </script>
+
+  <script type="text/template" id="edit-user-template">
+    <form class="edit-user-form">
+      <legend><%= user ? 'Update' : 'Create' %> User</legend>
+      <label>First Name</label>
+      <input type="text" name="firstname" value="<%= user ? user.get('firstname') : '' %>" />
+      <label>Last Name</label>
+      <input type="text" name="lastname" value="<%= user ? user.get('lastname') : '' %>" />
+      <label>Age</label>
+      <input type="text" name="age" value="<%= user ? user.get('age') : '' %>"/>
+      <hr />
+      <button type="submit" class="btn"><%= user ? 'Update' : 'Create' %> </button>
+      <% if(user) { %>
+        <input type="hidden" name="id" value="<%= user.id %>" />
+        <button class="btn btn-danger delete">Delete</button>
+      <% }; %>
+    </form>
+  </script>
+
+  <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/1.8.2/jquery.min.js" type="text/javascript"></script>
+  <script src="http://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.4.2/underscore-min.js" type="text/javascript"></script>
+  <script src="http://cdnjs.cloudflare.com/ajax/libs/backbone.js/0.9.2/backbone-min.js"></script>
+  <script>
+
+
+// code snippits ---------------------------------------------------------------------------------------------------
+    $.ajaxPrefilter( function( options, originalOptions, jqXHR ) {
+      options.url = 'http://backbonejs-beginner.herokuapp.com' + options.url;  //pass localhost:3000 when converting to rails api
+      });
+
+    $.fn.serializeObject = function() {
+      var o = {};
+      var a = this.serializeArray();
+      $.each(a, function() {
+          if (o[this.name] !== undefined) {
+              if (!o[this.name].push) {
+                  o[this.name] = [o[this.name]];
+              }
+              o[this.name].push(this.value || '');
+          } else {
+              o[this.name] = this.value || '';
+          }
+      });
+      return o;
+    };
+
+// 3rd --------------------------------------------------------------------------------------------------------------
+    var Users = Backbone.Collection.extend({
+      url: '/users',  //in backbone /users returns a list of users
+      // need to use an ajax prefilter to modify the base url of all ajax requests
+      // required if hosting servers externally to client
+    });
+
+// 5th --------------------------------------------------------------------------------------------------------------
+    var User = Backbone.Model.extend({
+      urlRoot: '/users',  //backbone knows how to append ids to urlRoot and it knows what type of request to submit given the request
+    });
+
+// 2nd --------------------------------------------------------------------------------------------------------------
+    var UserList = Backbone.View.extend({
+      // element is the continer for the view
+      // elements should have child views and NO views are outside element
+      el: '.page',
+      render: function() {
+        // HOW THIS WORKS
+              // this.$el.html('!CONTENT SHOULD SHOW HERE!');  --- this was initial test content
+        // 1) instantiate a new users collection to get data
+        var users = new Users();
+        // 2) define this because anonymous function doesn't have scope
+        var that = this; //hack to get around lack of scope (no this) in the anonymous function
+        users.fetch({
+          success: function(){
+            // templating function for displaying content,  HE uses _'s templating , we have used Handlebars
+            var template = _.template($('#user-list-template').html(), {users: users.models});
+        // 3) the above template function takes in the html string which is the table defined above with the id = "user-list-template" and passes it the content from users: users.models
+                // we are using _'s templating function (instead of Handlebars or another templating package)
+                // part one passes a string of data (the Jquery object $('#user-list-template') referring to the table above )
+                // the second argument passes the models to the template becaues we don't need the associated functions now
+            that.$el.html(template);
+          }
+        })
+      }
+
+    });
+//4th ---------------------------------------------------------------------------------------------------------------
+
+    var EditUser = Backbone.View.extend({
+      el: '.page',  //identifies the container element for the content that will be rendered by this views
+      render: function(options) {
+        var that = this;
+        if (options.id) {
+          that.user = new User({id: options.id})
+          that.user.fetch({
+            success: function(user) {
+              var template = _.template($('#edit-user-template').html(), {user: user});
+              that.$el.html(template);
+            }
+          }) //triggers GET users for user id
+        } else {
+        var template = _.template($('#edit-user-template').html(), {user: null});
+        this.$el.html(template);
+        }
+      },
+
+      events: {
+        // syntax for events
+        // the first word is the event
+        // separated by a space
+        // then the event you want it to do
+        // this is followed by a :  (colon) and the function that you want executed
+        'submit .edit-user-form': 'saveUser',
+        'click .delete': 'deleteUser'
+      },
+
+      saveUser: function(e) {
+        var userDetails = $(e.currentTarget).serializeObject();
+        var user = new User();
+        // call user.save (takes 2 parameters: 1- details to be sent to the server & saved  2- options hash of wahat to do on success)
+        user.save(userDetails, {
+          success: function(user) {
+            router.navigate('', {trigger: true});  //used for saving state of the page, updates url of the page, silent by default so need to tell it to trigger a route
+          }
+        })  //
+        console.log(userDetails);
+        return false; //this cancels the default behavior of refreshing the page when a form is submitted
+      },
+
+      deleteUser: function(e) {
+        this.user.destroy({
+          success: function() {
+            router.navigate('', {trigger: true});
+          }
+        })
+        return false;
+      }
+    });
+
+
+
+// 1st  (order of sections created)------------------------------------------------------------------------------------
+    // create backbone route for index route -- called homepage -- a route with no parameters
+    var Router = Backbone.Router.extend({
+      // backbone router takes object called routes
+      // can specify different actions depending on what route is in the browser navigation
+      routes: {
+        '': 'home',  //this loads home route (root route) and calls it 'home'
+        'new' : 'editUser',
+        'edit/:id' : 'editUser' //id from route is passed into the function "editUser "
+      }
+    });
+//------------------------------------------------------------------------------------------------------------------
+
+    var userList = new UserList();
+    var editUser = new EditUser();
+
+    var router = new Router();  //creates a new instance of router
+
+    //listen for router events --- routers emit events called route (specifically the route called home) and then execute function
+    router.on('route:home', function(){
+      userList.render();
+    });
+
+    router.on('route:editUser', function(id){
+      editUser.render({id: id});
+    });
+
+    // this tells backbone to start listening to the url for routes --  NOTHING will happen until this is set
+    Backbone.history.start();
+
+  </script>
+</body>
+</html>
+
+
+<!--
+class ApplicationController < ActionController::Base
+  protect_from_forgery
+
+  before_filter :allow_cross_domain_access
+  def allow_cross_domain_access
+    response.headers["Access-Control-Allow-Origin"] = "*"
+    response.headers["Access-Control-Allow-Methods"] = "GET, PUT, POST, DELETE"
+  end
+
+end -->
+
+<!-- $.ajaxPrefilter( function( options, originalOptions, jqXHR ) {
+    options.url = 'http://localhost:3000' + options.url;
+    options.crossDomain = true;
+  }); -->
+
+

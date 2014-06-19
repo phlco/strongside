@@ -1,0 +1,11 @@
+<%= form_for(@lamb) do |f| %>
+  <%= f.submit %>
+<% end %>
+
+<ul id="lambs">
+<% @lambs.each do |lamb| %>
+  <li class="lamb" data-id="<%= lamb.id %>">
+    <%= lamb.is_silent ? "lamb" : "baa" %>
+  </li>
+<% end %>
+</ul>

@@ -1,0 +1,44 @@
+$bg-color: #facade;
+$font: Arial;
+$font-color: #222;
+$base-em: 1em;
+$button-sign-in-bg: #ea4c88;
+$button-font-color: #eee;
+
+body{
+  background: $bg-color;
+}
+
+h1{
+  color: lighten($font-color, 20);
+  font-family: $font;
+  base-em: $base-em * 2;
+}
+
+.button{
+  background-color: $button-sign-in-bg;
+  color: $button-font-color;
+  border: none;
+  font-size: 14px;
+  line-height: 50px;
+  text-transform: uppercase;
+  width: 400px;
+
+  &:hover {
+    background: darken($button-sign-in-bg, 4%);
+  }
+}
+
+.foo {
+  div{
+    text-align: center;
+  }
+
+  & div {
+    color:red;
+  }
+
+  &.pickles{
+    color: red;
+  }
+}

@@ -1,0 +1,25 @@
+body {
+  background: #facade; }
+
+h1 {
+  color: #555555;
+  font-family: Arial;
+  base-em: 2em; }
+
+.button {
+  background-color: #ea4c88;
+  color: #eeeeee;
+  border: none;
+  font-size: 14px;
+  line-height: 50px;
+  text-transform: uppercase;
+  width: 400px; }
+  .button:hover {
+    background: #e83a7c; }
+
+.foo div {
+  text-align: center; }
+.foo div {
+  color: red; }
+.foo.pickles {
+  color: red; }

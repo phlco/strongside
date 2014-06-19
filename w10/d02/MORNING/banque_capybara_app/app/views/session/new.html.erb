@@ -1,0 +1,13 @@
+<% if flash[:errors] %>
+  <%= flash[:errors] %>
+<% end %>
+
+<%= form_tag(login_path, method: :post) do |f| %>
+  <%= field_set_tag "Login" do %>
+    <%= label_tag :email %>
+    <%= text_field_tag :email %>
+    <%= label_tag :password %>
+    <%= password_field_tag :password %>
+    <%= submit_tag "Login" %>
+  <% end %>
+<% end %>

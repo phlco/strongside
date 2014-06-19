@@ -1,0 +1,9 @@
+<%= form_for(@account) do |f| %>
+  <%= field_set_tag "Create Account" do %>
+    <%= f.label :name %>
+    <%= f.text_field :name %>
+    <%= f.label :balance %>
+    <%= f.number_field :balance %>
+    <%= f.submit %>
+  <% end %>
+<% end %>

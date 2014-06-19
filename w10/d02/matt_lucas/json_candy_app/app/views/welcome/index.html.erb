@@ -1,0 +1,171 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Json Candy app</title>
+  <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/2.1.1/css/bootstrap.min.css">;
+</head>
+<body>
+
+
+  <div class="container">
+    <h1>Candy Machine Manager</h1>
+    <hr />
+    <div class="page"></div>
+  </div>
+
+  <script type="text/template" id="machine-list-template">
+    <a href="#/new" class="btn btn-primary">New</a>
+    <hr />
+    <table class="table striped">
+      <thead>
+        <tr>
+          <th>First Name</th><th>Last Name</th><th>Age</th><th></th>
+        </tr>
+      </thead>
+      <tbody>
+        <% _.each(machines, function(machine) { %>
+          <tr>
+            <td><%= htmlEncode(machine.get('firstname')) %></td>
+            <td><%= htmlEncode(machine.get('lastname')) %></td>
+            <td><%= htmlEncode(machine.get('age')) %></td>
+            <td><a class="btn" href="#/edit/<%= machine.id%>">Edit</a></td>
+          </tr>
+        <% }); %>
+      </tbody>
+    </table>
+  </script>
+
+  <script type="text/template" id="edit-machine-template">
+    <form class="edit-machine-form">
+      <legend><%= machine ? 'Edit' : 'New' %> Machine</legend>
+        <label>First Name</label>
+        <input name="location" type="text" value="<%= machine ? machine.get('location') : '' %>">
+        <label>Last Name</label>
+        <input name="machine" type="text" value="<%= machine ? machine.get('candy') : '' %>">
+        <label>Age</label>
+        <input name="money" type="text" value="<%= machine ? machine.get('money') : '' %>">
+        <hr />
+      <button type="submit" class="btn"><%= machine ? 'Update' : 'Create' %></button>
+      <% if(machine) { %>
+        <input type="hidden" name="id" value="<%=machine.id %>" />
+      <button data-machine-id="<%= machine.id %>" class="btn btn-danger delete">Delete</button>
+      <% }; %>
+    </form>
+  </script>
+
+  <script>
+    function htmlEncode(value){
+      return $('<div/>').text(value).html();
+    }
+    $.fn.serializeObject = function() {
+      var o = {};
+      var a = this.serializeArray();
+      $.each(a, function() {
+          if (o[this.name] !== undefined) {
+              if (!o[this.name].push) {
+                  o[this.name] = [o[this.name]];
+              }
+              o[this.name].push(this.value || '');
+          } else {
+              o[this.name] = this.value || '';
+          }
+      });
+      return o;
+    };
+
+$.ajaxPrefilter( function( options, originalOptions, jqXHR ) {
+    options.url = 'http://localhost:3000' + options.url;
+    options.crossDomain = true;
+  });
+
+    var Users = Backbone.Collection.extend({
+      url: '/machines'
+    });
+
+    var Machine = Backbone.Model.extend({
+      urlRoot: '/machines'
+    });
+
+    var UserListView = Backbone.View.extend({
+      el: '.page',
+      render: function () {
+        var that = this;
+        var machines = new Machines();
+        machines.fetch({
+          success: function (machines) {
+            var template = _.template($('#machine-list-template').html(), {machines: machines.models});
+            that.$el.html(template);
+          }
+        })
+      }
+    });
+
+    var machineListView = new MachineListView();
+
+    var MachineEditView = Backbone.View.extend({
+      el: '.page',
+      events: {
+        'submit .edit-machine-form': 'saveUser',
+        'click .delete': 'deleteMachine'
+      },
+      saveMachine: function (ev) {
+        var userDetails = $(ev.currentTarget).serializeObject();
+        var machine = new Machine();
+        machine.save(machineDetails, {
+          success: function (machine) {
+            router.navigate('', {trigger:true});
+          }
+        });
+        return false;
+      },
+      deleteUser: function (ev) {
+        this.machine.destroy({
+          success: function () {
+            console.log('destroyed');
+            router.navigate('', {trigger:true});
+          }
+        });
+        return false;
+      },
+      render: function (options) {
+        var that = this;
+        if(options.id) {
+          that.machine = new Machine({id: options.id});
+          that.machine.fetch({
+            success: function (machine) {
+              var template = _.template($('#edit-machine-template').html(), {machine: machine});
+              that.$el.html(template);
+            }
+          })
+        } else {
+          var template = _.template($('#edit-machine-template').html(), {machine: null});
+          that.$el.html(template);
+        }
+      }
+    });
+
+    var userEditView = new UserEditView();
+
+    var Router = Backbone.Router.extend({
+        routes: {
+          "": "home",
+          "edit/:id": "edit",
+          "new": "edit",
+        }
+    });
+
+    var router = new Router;
+    router.on('route:home', function() {
+      // render machine list
+      userListView.render();
+    })
+    router.on('route:edit', function(id) {
+      userEditView.render({id: id});
+    })
+    Backbone.history.start();
+  </script>
+
+
+</body>
+</html>

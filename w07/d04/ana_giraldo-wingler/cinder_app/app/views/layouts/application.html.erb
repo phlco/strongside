@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>CINDER</title>
+  <%= stylesheet_link_tag    "application", :media => "all" %>
+  <%= javascript_include_tag "application" %>
+  <%= csrf_meta_tags %>
+</head>
+<body>
+
+  <h1 align="right"> <%= image_tag "http://media.tumblr.com/tumblr_m29nrtWXVa1r94pqh.gif" %> CINDER</h1>
+
+  <nav align="right">
+    <%= link_to "all the cats", "/cats" %> |
+    <%= link_to "make a new cat", "/cats/new" %>
+  </nav>
+
+  <%= yield %>
+
+</body>
+</html>

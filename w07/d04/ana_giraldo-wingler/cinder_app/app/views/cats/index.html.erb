@@ -1,0 +1,6 @@
+<h2>all the cats</h2>
+<ul>
+  <% @cats.each do |cat| %>
+  <li><%= link_to "#{cat.name}", "/cats/#{cat.id}" %></li>
+  <% end %>
+</ul>

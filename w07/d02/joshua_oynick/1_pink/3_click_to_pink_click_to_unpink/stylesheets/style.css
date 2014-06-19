@@ -1,0 +1,23 @@
+.pink {
+  background-color: #ffb7c3;
+}
+
+.button {
+  margin-right: auto;
+  margin-left: auto;
+  margin-top: 20%;
+
+  text-align: center;
+  line-height: 150px;
+
+  width: 150px;
+  height: 150px;
+  -webkit-border-radius: 75px;
+  -moz-border-radius: 75px;
+  border-radius: 75px;
+
+  font-family: 'Century Gothic';
+  font-size: 40px;
+  background-color: #ffdae9;
+  color: white;
+}

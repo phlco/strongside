@@ -1,0 +1,52 @@
+<div id="films">
+  <button id="bestBond">best bond</button>
+  <button id="worstBond">worst bond</button>
+  <button id="loneliestBond">loneliest bond</button>
+  <button id="oddBonds">odd bonds</button>
+  <button id="starCount">star count</button>
+  <button id="totalGross">total Gross</button>
+  <button id="getActors">get actors</button>
+  <button id="viewAll">view all</button>
+  <div id="display"></div>
+</div>
+
+<script id="films-table-template" type="text/x-handlebars-template">
+<table>
+  <thead>
+    <tr>
+      <td>title</td>
+      <td>year</td>
+      <td>actor</td>
+      <td>gross</td>
+    </tr>
+  </thead>
+  <tbody>
+  {{#each films}}
+  <tr>
+    <td>{{title}}</td>
+    <td>{{year}}</td>
+    <td>{{actor}}</td>
+    <td>{{gross}}</td>
+  </tr>
+  {{/each}}
+  </tbody>
+</table>
+</script>
+
+<script id="actor-template" type="text/x-handlebars-template">
+  <p>{{actor}} : {{gross}}</p>
+</script>
+
+<script id="title-template" type="text/x-handlebars-template">
+  <ul>
+    {{#each titles}}
+    <li>{{this}}</li>
+    {{/each}}
+  </ul>
+</script>
+
+<script id="obj-template" type="text/x-handlebars-template">
+  {{#each star}}
+    <p>{{@key}}: {{this}}</p>
+  {{/each}}
+</script>

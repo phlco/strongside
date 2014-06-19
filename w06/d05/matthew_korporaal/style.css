@@ -1,0 +1,29 @@
+body {
+  background-color: black;
+}
+div {
+  color: white;
+}
+#alderaan {
+  position: relative;
+  height: 200px;
+  width: 200px;
+  left: 100px;
+  background-color: blue;
+  border-radius: 100%;
+
+}
+
+#death-star {
+  position: relative;
+  height: 120px;
+  width: 120px;
+  margin-top: 100px;
+  left: 100px;
+  background-color: grey;
+  border-radius: 100%;
+}
+
+#never {
+  position:fixed;
+}

@@ -1,0 +1,10 @@
+%script#exercises-template{type:"text/x-handlebars-template"}
+  %button#new-exercise New Exercise
+  %ul
+    {{#each exercises}}
+    %li.exercise
+      %div
+        %strong {{name}}
+        %button#exercise-detail{data: {id: "{{id}}" }} info
+        %button#delete-exercise{data: {id: "{{id}}" }}  X
+    {{/each}}

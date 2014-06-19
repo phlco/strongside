@@ -1,0 +1,13 @@
+%h1 Git Fit
+#exercises
+#detail
+#random
+#new
+
+= button_to 'New Workout Form', "/#exercises/new", id: "new-form"
+= button_to 'Random Workout', "/#exercises/workout", id: "random-workout"
+
+= render partial: 'exercise'
+= render partial: 'detail'
+= render partial: 'exerciseform'
+= render partial: 'random'

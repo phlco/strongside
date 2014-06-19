@@ -1,0 +1,10 @@
+%script#exercises-template{type:"text/x-handlebars-template"}
+  %ul
+    {{#each exercises}}
+    %li.exercise{data: {id: "{{id}}" }}
+      %div
+        %strong {{name}}
+    =button_to "x", "api/exercises/{{id}}", method: :delete, conform: "Are you sure?", id: "delete_button"
+    {{/each}}
+
+

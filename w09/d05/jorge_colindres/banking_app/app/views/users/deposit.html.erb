@@ -1,0 +1,13 @@
+<h1>New Deposit</h1>
+<%= form_tag do_deposit_path(@user), method: 'put' do %>
+  <div class="field">
+    <%= label_tag :account %>
+    <%= collection_select(:user, :bank_accounts, BankAccount.all, :id, :name, {}, {name: 'account'}) %>
+  </div>
+  <div class="field">
+    <%= label_tag :amount %>
+    <%= text_field_tag 'amount', '' %>
+  </div>
+  <div class="actions"><%= submit_tag "Deposit" %></div>
+<% end %>
+<%= link_to 'Cancel', user_path(@user) %>

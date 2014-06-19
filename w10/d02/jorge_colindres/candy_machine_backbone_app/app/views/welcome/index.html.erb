@@ -1,0 +1,60 @@
+<script type="text/x-handlebars-template" id="machines-list-template">
+  <br>
+  <a href="#/new" class="btn btn-primary">New Machine</a>
+  <br><br>
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th>Candy</th>
+        <th>Candy Price</th>
+        <th>Location</th>
+        <th>Money</th>
+        <th colspan="4"></th>
+      </tr>
+    </thead>
+    <tbody>
+      {{#each machines}}
+          <tr id="machine-{{id}}">
+            <td class="candy">{{candy}}</td>
+            <td class="candy-price">{{candy_price}}</td>
+            <td class="location">{{location}}</td>
+            <td class="money">{{money}}</td>
+            <td><a href="#" class="btn btn-info btn-xs buy-candy">Buy Candy</a></td>
+            <td><a href="#" class="btn btn-warning btn-xs refill">Refill Machine</a></td>
+            <td><a href="#" class="btn btn-success btn-xs cashout">Cashout</a></td>
+            <td><a href="#/edit/{{id}}" class="btn btn-default btn-xs">Edit Machine</a></td>
+          </tr>
+        {{/each}}
+    </tbody>
+  </table>
+</script>
+
+<script type="text/x-handlebars-template" id="edit-machine-template">
+  <form role="form" class="edit-machine-form">
+    <legend>
+      {{#if machine}}
+        Edit
+      {{else}}
+        New
+      {{/if}}
+       Machine
+    </legend>
+    <div class="form-group">
+      <label for="location">Location</label>
+        <input type="text" name="location" class="form-control" value="{{machine.location}}">
+    </div>
+    <button type="submit" class="btn btn-success">
+      {{#if machine}}
+        Update
+      {{else}}
+        Create
+      {{/if}}
+       Machine
+    </button>
+    {{#if machine}}
+      <button class="btn btn-danger delete-machine">Delete Machine</button>
+      <input type="hidden" name="id" value="{{machine.id}}">
+   {{/if}}
+   <a href="#" class="btn btn-link go-home">Cancel</a>
+  </form>
+</script>

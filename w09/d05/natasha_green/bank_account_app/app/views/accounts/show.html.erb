@@ -1,0 +1,27 @@
+<%=link_to "Back", users_path  %>
+
+<h1> <%= @user.name%>, in <%= @account.name %> </h1> <br>
+  You have <%= @account.balance %>
+
+<% form_tag(user_accounts_path, :method => :post) do %>
+  <%= text_field_tag 'amount' %><br>
+  <%= submit_tag 'Deposit' %>
+  <%= submit_tag 'Withdraw' %>
+<% end %> <br>
+
+<%= link_to 'Account', :ccontroller => 'show' %>
+
+
+
+<!--Note:  form_for makes it easy to have a set of fields and populate them from a model object, then gather up the results and put them into a hash which can be assigned directly back to the same type of model object to create a new one or edit the values in it. But we don’t have a model for this page, we just one one value (a number in this case) returned to the controller so form_tag is what makes sense. -->
+
+<!--
+#create a form to deposit and withdraw
+# form helper --  the method in the form will be for the post
+# ajax request to increase or decrease money
+# you can do a regular form submission
+#through the update method you can do a change to the database
+# do a redirect to the same page as a starter
+#the redirect will be a refresh to show the balance is actually changing
+ -->
+

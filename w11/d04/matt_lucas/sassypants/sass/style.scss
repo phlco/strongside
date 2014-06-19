@@ -1,0 +1,42 @@
+/* this is a comment*/
+
+$background-color: #CCC888;
+$button-color: #ea4c88;
+
+body {
+  background: darken($background-color, 15%);
+}
+
+.title {
+  font-size: 2em;
+}
+
+.button {
+  background: $button-color;
+  color: white;
+  text-transform: uppercase;
+  width: 25%;
+  height: 10%;
+  font-size: 1.25em;
+  border: none;
+  line-height: 50px;
+  &:hover{
+  background: darken($button-color, 10%);
+  }
+}
+
+.foo {
+  div {
+    text-align: center;
+  }
+  &.pickles {
+    color: red;
+  }
+}
+
+
+
+
+
+
+

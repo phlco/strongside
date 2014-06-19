@@ -1,0 +1,8 @@
+%script#workouts-template{type:"text/x-handlebars-template"}
+  %button Create Workout
+  %ul
+    {{#each exercises}}
+    %li.exercise{data: {id: "{{id}}" }}
+      %div
+        %strong {{name}}
+    {{/each}}

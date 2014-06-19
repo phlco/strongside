@@ -1,0 +1,49 @@
+.group:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+html {
+  font-size: 24px;
+  font-family: "Raleway", sans-serif;
+  -webkit-font-smoothing: antialiased; }
+
+h1, h2, h3 {
+  font-family: "Yanone Kaffeesatz";
+  margin: 0; }
+
+p { line-height:1.6; }
+li { line-height: 1.5; }
+
+.remark-slide-content pre {
+font-family: Monaco, monospace;
+font-size: 18px; }
+
+.two-thirds { width: 75%; }
+.hlf {
+ width: 47.61905%;
+ float: left;
+ margin-right: 2.38095%;
+ display: inline; }
+.hlf:last-child {
+  margin-right: 0; }
+
+.rails3,
+.rails4 { position: relative; }
+.rails3:after,
+.rails4:after {
+  position: absolute;
+  top: -18px;
+  left: -15px;
+  border-radius: 2px;
+  padding: 2px 7px 3px;
+  color: #fff;
+  font-weight: bold; }
+.rails3:after {
+  content: "Rails 3";
+  background: #b1280e; }
+.rails4:after{
+  content: "Rails 4";
+  background: #0077b1; }
+

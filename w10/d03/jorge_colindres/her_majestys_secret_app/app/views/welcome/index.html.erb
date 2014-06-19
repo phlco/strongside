@@ -1,0 +1,38 @@
+<div class="page">
+</div>
+
+
+
+
+<script id="films-list-template" type="text/x-handlebars-template">
+  <table class="table table-striped">
+    <thead>
+      <h2>Bond Films</h2>
+      <hr>
+      <button class="btn btn-primary btn-xs get-best">Best Bond?</button>
+      <button class="btn btn-primary btn-xs get-worst">Worst Bond?</button>
+      <button class="btn btn-primary btn-xs get-lonliest">Lonliest Bond?</button>
+      <button class="btn btn-primary btn-xs get-odd">Odd Bonds?</button>
+      <br>
+      <br>
+      <tr>
+        <th>Title</th>
+        <th>Star</th>
+        <th>Gross</th>
+        <th>Year</th>
+      </tr>
+    </thead>
+    <tbody>
+      {{#each films}}
+        <tr>
+          <td>{{title}}</td>
+          <td>{{actor}}</td>
+          <td>{{gross}}</td>
+          <td>{{year}}</td>
+        </trd>
+      {{/each}}
+    </tbody>
+    </fieldset>
+  </table>
+
+</script>

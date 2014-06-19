@@ -1,0 +1,11 @@
+<%= form_for ([@customer, @account]) do |f| %>
+  <%#= f.label :name %>
+  <%= f.text_field :name, :placeholder => "my new bank account" %>
+  <%= f.submit "create my new account" %>
+<% end %>
+
+<% if @customer.accounts.any? %>
+  <% @customer.accounts.each do |account| %>
+  <li><%= account.name %> | <%= account.balance %> | <%= link_to 'see your account history', customer_account_path(@customer, account.id ) %></li> | <%= link_to 'make a transaction', edit_customer_account_path(@customer, account.id ) %>
+  <% end %>
+<% end %>

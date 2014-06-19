@@ -1,0 +1,15 @@
+<%= image_tag @cat.image_url %>
+<div>
+  <%= label_tag "Name:" %>
+  <%= @cat.name %>
+</div>
+<div>
+  <%= label_tag "Age:" %>
+  <%= @cat.age %>
+</div>
+<div>
+  <%= label_tag "Tag Line:" %>
+  <%= @cat.tag_line %>
+</div>
+<%= link_to("update", edit_cat_path(@cat.id)) %>
+<%= link_to("delete", "/cat/#{@cat.id}", method: "delete") %>

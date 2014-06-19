@@ -1,0 +1,38 @@
+$background-color: #222;
+
+
+$button-color: #ea4c88;
+
+body {
+	background: $background-color;
+	}
+
+// .button {
+// 	background-color: $button-color;
+// 	font-size: 14;
+// 	line-height: 2em;
+// }
+
+
+// // this has the css respond to a mouse hover
+// .button:hover {
+// 	// this changes the color of the button based on teh above condition
+// 	background: darken($button-color, 4%);
+// }
+
+
+.button {
+	background-color: $button-color;
+	font-size: 14;
+	line-height: 2em;
+	
+	&:hover {
+		background: darken($button-color, 40%);
+	}
+}
+
+
+
+
+
+

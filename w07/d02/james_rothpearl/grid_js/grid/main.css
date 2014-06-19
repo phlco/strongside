@@ -1,0 +1,16 @@
+.tile {
+  height: 100px;
+  width: 100px;
+  border: 1px solid black;
+  float: left;
+}
+
+.green-bg {
+  background-color: green;
+}
+
+
+.painted-green {
+  background-color: green;
+}
+

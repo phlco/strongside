@@ -1,0 +1,14 @@
+<h1>Welcome#index</h1>
+<p>Find me in app/views/welcome/index.html.erb</p>
+
+<!-- with rails helper -->
+<%= link_to("New User remote true", "/users/new", data: {remote: true, type: "json" }) %>
+<!-- turns into this pure html -->
+<a href="/users/new">New User</a>
+
+<!-- Remote true to pull down all my github repos as JSON.
+In my app.js I'm listening for ajax:success -->
+<%= link_to("github repos", "https://api.github.com/users/phlco", remote: true) %>
+
+
+<button id="dog">dog</button>

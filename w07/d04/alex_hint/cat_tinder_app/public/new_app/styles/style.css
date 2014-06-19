@@ -1,0 +1,19 @@
+body {
+  background-color: #2ECC71;
+  font-family: georgia;
+  padding: 10px;
+}
+
+img {
+  margin-top: 10px;
+  width: 200px;
+  height: 200px;
+}
+
+ul {
+  display: inline-block;
+}
+
+div {
+  padding: 15px;
+}

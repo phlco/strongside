@@ -1,0 +1,9 @@
+#map-canvas {
+  height: 400px;
+  width: 960px;
+}
+
+#notice {
+  background: red;
+  color:white;
+}

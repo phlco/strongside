@@ -1,0 +1,16 @@
+Test for user validation
+
+  -A user requires a name, email and password.
+  -Passwords must be 8 to 16 characters in length.
+  -User names and emails must be unique.
+  -Users can have more than one Account
+  -Users should have a method total_balance, that returns the -total amount of money they have.
+  -Users should have a method rich?, that returns true if they have more than 100k
+
+Test for account validation
+
+  -Accounts require a name (Any string), and balance
+  -Accounts have an opening balance of 0.
+  -Accounts will have deposit and withraw methods.
+  -Accounts can't be overdrawn.
+  -Accounts belong to a User

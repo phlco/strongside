@@ -1,0 +1,6 @@
+<% url = "/users/#{current_user.id}/accounts" %>
+<form action=<%= url %> method="post" id="new-account-form">
+  <label for="account-balance">New Account Balance: </label>
+  <input name="new_account_balance" type="text" id="new-account-balance" placeholder="$xxxx.xx" required>
+  <input type="submit" value="Confirm New Account" id="confirm-new-account">
+</form>

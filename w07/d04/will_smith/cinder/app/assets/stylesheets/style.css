@@ -1,0 +1,38 @@
+body{
+  background: #ecf0f1;
+}
+
+#cats {
+  display: inline-block;
+  float: left;
+  width: 400px;
+  height: 350px;
+  padding: 10px;
+  margin: 5px;
+  border: 1px solid #2c3e50;
+  border-radius: 4px;
+  background: #16a085;
+}
+
+.cat-info {
+  float: left;
+  width: 100px;
+}
+.tagline {
+  clear: both;
+}
+.cat-pic {
+  float: left;
+}
+
+.cat-pic img {
+  width: 250px;
+  height: 250px;
+  border-radius: 8px;
+  float: right;
+
+}
+
+.cat-links {
+  clear: both;
+}

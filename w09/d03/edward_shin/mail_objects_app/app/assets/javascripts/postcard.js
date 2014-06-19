@@ -1,0 +1,3 @@
+function Postcard(){
+this.message;
+}

@@ -1,0 +1,13 @@
+<h1>Hello</h1>
+<a href="/cats/new">Create New Cat :)</a>
+<br>
+<br>
+<% @cats.each do |cat| %>
+  <a href="cats/<%= cat.id %>">
+  <%= cat.name %><br>
+  <%#= cat.age %>
+  <%#= cat.tagline %>
+  <img src="<%= cat.image %>"><br>
+  <br> <br>
+  </a>
+<% end %>

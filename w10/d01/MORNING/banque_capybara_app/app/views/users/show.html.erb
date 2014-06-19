@@ -1,0 +1,73 @@
+<% if flash[:message] %>
+  <p><%= flash[:message] %></p>
+<% end %>
+
+<h1>Dashboard</h1>
+<div class="controls">
+  <%= button_tag("Withdraw/Transfers", id: "show-withdraw") %>
+  <%= button_tag("Make Deposit", id: "show-deposit") %>
+  <%= link_to 'Add Account',  new_account_path %>
+</div>
+
+<div id="accounts">
+  <h1>Accounts</h1>
+  <table>
+    <thead>
+      <tr>
+        <td>Account Name</td>
+        <td>Account Balance</td>
+      </tr>
+    </thead>
+  <% @user.accounts.each do |account| %>
+    <tr>
+      <td><%= link_to account.name, account_path(account) %></td>
+      <td><%= number_to_currency account.balance %></td>
+    </tr>
+  <% end %>
+  </table>
+</div>
+
+<div id="balance">
+  <p>Total Balance: $<span><%= @user.total_balance %></span></p>
+</div>
+
+<form id="deposit-form" style="display: none;">
+  <fieldset>
+    <legend>Deposit</legend>
+    <label for="deposit-accoun">Account</label>
+    <select name="deposit-account" id="deposit-accoun">
+      <% @user.accounts.each do |account| %>
+        <option value="<%= account.id %>"><%= account.name %></option>
+      <% end %>
+    </select>
+    <label for="deposit-amount">Amount</label>
+    <input type="text" name="deposit-amount" id="deposit-amount" placeholder="amount">
+    <button>Deposit</button>
+  </fieldset>
+</form>
+
+<form id="withdraw-form" style="display: none;">
+  <fieldset>
+    <legend>Withdraw/Transfer</legend>
+    <input type="text" name="withdraw-amount" id="withdraw-amount" placeholder="amount">
+    <label for="withdraw-account">Account</label>
+    <select name="withdraw-account" id="withdraw-account">
+    <% @user.accounts.each do |account| %>
+      <option value="<%= account.id %>"><%= account.name %></option>
+    <% end %>
+    </select>
+    <br>
+    <label for="transaction-withdraw">Withdraw</label>
+    <input type="radio" name="transaction-type" value="withdraw" id="transaction-withdraw" checked>
+    <label for="transaction-transfer">Transfer</label>
+    <input type="radio" name="transaction-type" value="transfer" id="transaction-transfer">
+    <select name="transfer-to-account" style="display: none">
+    <% @user.accounts.each do |account| %>
+      <option value="<%= account.id %>"><%= account.name %></option>
+    <% end %>
+    </select>
+    <br>
+    <input type="text" name="transaction-memo" placeholder="memo">
+    <input type="submit" value="Confirm">
+  </fieldset>
+</form>

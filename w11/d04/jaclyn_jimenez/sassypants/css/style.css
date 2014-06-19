@@ -1,0 +1,24 @@
+body {
+  background-color: #16e28d;
+  color: #e2166b;
+  font-family: helvetica;
+  font-size: 1.5em; }
+
+h1 {
+  border: 10px solid #facade;
+  border-radius: 20px;
+  width: 400px;
+  color: #0e925b;
+  background-color: #9cf5d0;
+  padding: 20px; }
+
+p {
+  background-color: #6df1ba;
+  width: 600px;
+  padding: 20px;
+  border: 3px solid #e91d72;
+  border-radius: 3px; }
+
+p:hover {
+  background-color: #0d8553;
+  color: #f59cc1; }

@@ -1,0 +1,22 @@
+<h1><%= @bank_account.name %></h1>
+
+<p>
+  <b>Account Balance:</b>
+  <span id="account-balance">
+    <%= number_to_currency(@bank_account.balance, :unit => "$") %>
+  </span>
+</p>
+
+<p>
+  <b>Account History</b>
+  <table class="account-history">
+    <tr>
+      <th>Date</th>
+      <th>Type</th>
+      <th>Amount</th>
+      <th>Memo</th>
+    </tr>
+  </table>
+</p>
+
+<%= link_to "Back", user_path(@bank_account.user) %>
